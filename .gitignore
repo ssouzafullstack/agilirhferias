@@ -1,0 +1,72 @@
+###############################
+# React / Front-end
+###############################
+node_modules/
+dist/
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+.env
+.env.*
+
+# Cache
+.cache/
+.eslintcache
+parcel-cache/
+coverage/
+
+# Editor folders
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+###############################
+# .NET Core / Back-end
+###############################
+# Build outputs
+bin/
+obj/
+out/
+artifacts/
+
+# User-specific
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Rider / ReSharper
+.ReSharper*/
+*_ReSharper.*/
+*.DotSettings.user
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Env configs
+appsettings.*.local.json
+
+###############################
+# Extras
+###############################
+# Global caches
+*.local

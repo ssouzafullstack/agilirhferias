@@ -1,0 +1,17 @@
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Service.Contracts.deps.json
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Service.Contracts.dll
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Service.Contracts.pdb
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Entities.dll
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Shared.dll
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Entities.pdb
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\bin\Debug\net8.0\AgiliRHFerias.Shared.pdb
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.csproj.AssemblyReference.cache
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.AssemblyInfoInputs.cache
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.AssemblyInfo.cs
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHF.1EE23200.Up2Date
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.dll
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\refint\AgiliRHFerias.Service.Contracts.dll
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\AgiliRHFerias.Service.Contracts.pdb
+C:\Users\srlim\Documents\Unicesumar\projeto_v2\AgiliRHFerias\AgiliRHFerias.Service.Contracts\obj\Debug\net8.0\ref\AgiliRHFerias.Service.Contracts.dll

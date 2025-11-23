@@ -1,0 +1,299 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.LoggerService\\AgiliRHFerias.LoggerService.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\AgiliRHFerias.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\AgiliRHFerias.Contracts.csproj",
+        "projectName": "AgiliRHFerias.Contracts",
+        "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\AgiliRHFerias.Contracts.csproj",
+        "packagesPath": "C:\\Users\\srlim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\srlim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj": {
+                "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj"
+              },
+              "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\AgiliRHFerias.Shared.csproj": {
+                "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\AgiliRHFerias.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj",
+        "projectName": "AgiliRHFerias.Entities",
+        "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj",
+        "packagesPath": "C:\\Users\\srlim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\srlim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.21, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[8.0.21, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.LoggerService\\AgiliRHFerias.LoggerService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.LoggerService\\AgiliRHFerias.LoggerService.csproj",
+        "projectName": "AgiliRHFerias.LoggerService",
+        "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.LoggerService\\AgiliRHFerias.LoggerService.csproj",
+        "packagesPath": "C:\\Users\\srlim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.LoggerService\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\srlim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\AgiliRHFerias.Contracts.csproj": {
+                "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Contracts\\AgiliRHFerias.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\AgiliRHFerias.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\AgiliRHFerias.Shared.csproj",
+        "projectName": "AgiliRHFerias.Shared",
+        "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\AgiliRHFerias.Shared.csproj",
+        "packagesPath": "C:\\Users\\srlim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\srlim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj": {
+                "projectPath": "C:\\Users\\srlim\\Documents\\Unicesumar\\projeto_v2\\AgiliRHFerias\\AgiliRHFerias.Entities\\AgiliRHFerias.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

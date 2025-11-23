@@ -1,0 +1,14 @@
+﻿using AgiliRHFerias.Shared.DataTransferObjects.Authentication;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+
+namespace AgiliRHFerias.Service.Contracts
+{
+    public interface IAuthenticationService
+    {
+        Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
+        Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
+        Task<TokenDto> CreateToken(bool populateExp);
+        Task<TokenDto> RefreshToken(RefreshTokenDto tokenDto);
+    }
+}

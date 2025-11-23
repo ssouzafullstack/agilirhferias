@@ -1,0 +1,6 @@
+@AgiliRHFerias.API_HostAddress = http://localhost:5268
+
+GET {{AgiliRHFerias.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

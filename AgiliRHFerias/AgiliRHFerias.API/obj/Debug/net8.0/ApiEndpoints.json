@@ -1,0 +1,514 @@
+[
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.AuthenticationController",
+    "Method": "RegisterUser",
+    "RelativePath": "api/authentication",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userForRegistration",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.Authentication.UserForRegistrationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.AuthenticationController",
+    "Method": "Authenticate",
+    "RelativePath": "api/authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.Authentication.UserForAuthenticationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "GetCompanies",
+    "RelativePath": "api/companies",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "CreateCompany",
+    "RelativePath": "api/companies",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "company",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.CompanyForCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "GetEmployeesForCompany",
+    "RelativePath": "api/companies/{companyId}/employees",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "MinAge",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaxAge",
+        "Type": "System.UInt32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ValidAgeRange",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SearchTerm",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "OrderBy",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "CreateEmployeeForCompany",
+    "RelativePath": "api/companies/{companyId}/employees",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "employee",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.EmployeeForCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "GetEmployeeForCompany",
+    "RelativePath": "api/companies/{companyId}/employees/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetEmployeeForCompany"
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "DeleteEmployeeForCompany",
+    "RelativePath": "api/companies/{companyId}/employees/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "UpdateEmployeeForCompany",
+    "RelativePath": "api/companies/{companyId}/employees/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "employee",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.EmployeeForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmployeesController",
+    "Method": "PartiallyUpdateEmployeeForCompany",
+    "RelativePath": "api/companies/{companyId}/employees/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "patchDoc",
+        "Type": "Microsoft.AspNetCore.JsonPatch.Operations.Operation[]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "GetCompany",
+    "RelativePath": "api/companies/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "CompanyById"
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "DeleteCompany",
+    "RelativePath": "api/companies/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "UpdateCompany",
+    "RelativePath": "api/companies/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "company",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.CompanyForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "CreateCompanyCollection",
+    "RelativePath": "api/companies/collection",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyCollection",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[AgiliRHFerias.Shared.DataTransferObjects.CompanyForCreationDto, AgiliRHFerias.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.CompaniesController",
+    "Method": "GetCompanyCollection",
+    "RelativePath": "api/companies/collection/({ids})",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "CompanyCollection"
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigCalculoFeriasController",
+    "Method": "Get",
+    "RelativePath": "api/configCalculoFerias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigCalculoFeriasController",
+    "Method": "Update",
+    "RelativePath": "api/configCalculoFerias/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "configCalculoFerias",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.ConfigsCalculoFerias.ConfigCalculoFeriasForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigOrcamentoFeriasController",
+    "Method": "Get",
+    "RelativePath": "api/configOrcamentoFerias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigOrcamentoFeriasController",
+    "Method": "Update",
+    "RelativePath": "api/configOrcamentoFerias/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "config",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.ConfigsOrcamentoFerias.ConfigOrcamentoFeriasForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigPeriodoAquisitivoController",
+    "Method": "GetAll",
+    "RelativePath": "api/configPeriodoAquisitivo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [],
+    "EndpointName": "GetAll"
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigPeriodoAquisitivoController",
+    "Method": "Create",
+    "RelativePath": "api/configPeriodoAquisitivo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "configPeriodoAquisitivo",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.ConfigsPeriodoAquisitivo.ConfigPeriodoAquisitivoForCreationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigPeriodoAquisitivoController",
+    "Method": "Get",
+    "RelativePath": "api/configPeriodoAquisitivo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "Get"
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigPeriodoAquisitivoController",
+    "Method": "Update",
+    "RelativePath": "api/configPeriodoAquisitivo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "configPeriodoAquisitivo",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.ConfigsPeriodoAquisitivo.ConfigPeriodoAquisitivoForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigPeriodoAquisitivoController",
+    "Method": "Delete",
+    "RelativePath": "api/configPeriodoAquisitivo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigReducaoDiasFeriasController",
+    "Method": "Get",
+    "RelativePath": "api/configReducaoDiasFerias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.ConfigReducaoDiasFeriasController",
+    "Method": "Update",
+    "RelativePath": "api/configReducaoDiasFerias/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "config",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.ConfigsReducaoDiasFerias.ConfigReducaoDiasFeriasForUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.EmpresaController",
+    "Method": "GetAll",
+    "RelativePath": "api/empresa",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AgiliRHFerias.Presentation.Controllers.TokenController",
+    "Method": "Refresh",
+    "RelativePath": "api/token/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tokenDto",
+        "Type": "AgiliRHFerias.Shared.DataTransferObjects.Authentication.RefreshTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

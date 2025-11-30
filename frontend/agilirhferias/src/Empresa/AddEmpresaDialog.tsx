@@ -11,7 +11,6 @@ import {
   Label,
   makeStyles,
   Select,
-  Option,
 } from "@fluentui/react-components";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import type { EmpresaForUpsertDto } from "../stores/EmpresaStore";
@@ -46,13 +45,10 @@ interface AddEmpresaDialogProps {
 
 const initialFormData: EmpresaForUpsertDto = {
   nomeFantasia: "",
-  tipo: "",
+  filial: false,
   cnpj: "",
   cep: "",
-  cidade: "",
-  situacao: "",
-  codigo: "",
-  estado: "",
+  situacao: 1,
   razaoSocial: "",
 };
 
@@ -109,16 +105,16 @@ export function AddEmpresaDialog({
               </div>
 
               <div className={styles.fieldRow}>
+                <Label className={styles.label}>Matriz:</Label>
                 <Select
                   className={styles.input}
-                  value={formData.tipo}
+                  value={formData.filial ? "SIM" : "NÃO"}
                   onChange={(_, data) =>
-                    handleChange("tipo", data.value as "Matriz" | "Filial")
+                    handleChange("filial", data.value === "SIM")
                   }
                 >
-                  <Option value="">Selecione</Option>
-                  <Option value="Matriz">Matriz</Option>
-                  <Option value="Filial">Filial</Option>
+                  <option value="SIM">Matriz</option>
+                  <option value="NÃO">Filial</option>
                 </Select>
               </div>
 
@@ -143,26 +139,16 @@ export function AddEmpresaDialog({
               </div>
 
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Cidade:</Label>
-                <Input
-                  className={styles.input}
-                  value={formData.cidade ?? ""}
-                  onChange={(_, d) => handleChange("cidade", d.value ?? "")}
-                  placeholder="Ex: Londrina"
-                />
-              </div>
-
-              <div className={styles.fieldRow}>
+                <Label className={styles.label}>Situação:</Label>
                 <Select
                   className={styles.input}
-                  value={formData.situacao}
+                  value={String(formData.situacao)}
                   onChange={(_, data) =>
-                    handleChange("situacao", data.value as "Ativa" | "Baixada")
+                    handleChange("situacao", Number(data.value))
                   }
                 >
-                  <Option value="">Selecione</Option>
-                  <Option value="Ativa">Ativa</Option>
-                  <Option value="Baixada">Baixada</Option>
+                  <option value="1">Ativa</option>
+                  <option value="2">Inativa</option>
                 </Select>
               </div>
             </form>

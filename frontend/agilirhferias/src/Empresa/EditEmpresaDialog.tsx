@@ -10,7 +10,6 @@ import {
   Label,
   makeStyles,
   Select,
-  Option,
 } from "@fluentui/react-components";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import { useEffect } from "react";
@@ -110,16 +109,16 @@ const EditEmpresaDialog = observer(
                   </div>
 
                   <div className={styles.fieldRow}>
+                    <Label className={styles.label}>Matriz:</Label>
                     <Select
                       className={styles.input}
-                      value={dto.tipo}
+                      value={dto.filial ? "SIM" : "NÃO"}
                       onChange={(_, data) =>
-                        handleChange("tipo", data.value as "Matriz" | "Filial")
+                        handleChange("filial", data.value === "SIM")
                       }
                     >
-                      <Option value="">Selecione</Option>
-                      <Option value="Matriz">Matriz</Option>
-                      <Option value="Filial">Filial</Option>
+                      <option value="SIM">Matriz</option>
+                      <option value="NÃO">Filial</option>
                     </Select>
                   </div>
 
@@ -142,31 +141,17 @@ const EditEmpresaDialog = observer(
                       placeholder="Ex: 86000-000"
                     />
                   </div>
-
                   <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Cidade:</Label>
-                    <Input
-                      className={styles.input}
-                      value={dto.cidade ?? ""}
-                      onChange={(_, d) => handleChange("cidade", d.value ?? "")}
-                      placeholder="Ex: Londrina"
-                    />
-                  </div>
-
-                  <div className={styles.fieldRow}>
+                    <Label className={styles.label}>Situação:</Label>
                     <Select
                       className={styles.input}
-                      value={dto.situacao}
+                      value={String(dto.situacao)}
                       onChange={(_, data) =>
-                        handleChange(
-                          "situacao",
-                          data.value as "Ativa" | "Baixada"
-                        )
+                        handleChange("situacao", Number(data.value))
                       }
                     >
-                      <Option value="">Selecione</Option>
-                      <Option value="Ativa">Ativa</Option>
-                      <Option value="Baixada">Baixada</Option>
+                      <option value="1">Ativa</option>
+                      <option value="2">Inativa</option>
                     </Select>
                   </div>
                 </form>

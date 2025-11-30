@@ -51,18 +51,17 @@ const Empresa = observer(() => {
         columns={[
           {
             key: "nomeFantasia",
-            label: "Código - Nome Fantasia",
+            label: "Nome Fantasia",
             width: "30%",
           },
           {
-            key: "tipo",
-            label: "Filial",
+            key: "filialDesc",
+            label: "Matriz",
             width: "25%",
           },
           { key: "cnpj", label: "CNPJ", width: "25%" },
           { key: "cep", label: "CEP", width: "25%" },
-          { key: "cidade", label: "Cidade", width: "25%" },
-          { key: "situacao", label: "Situação", width: "25%" },
+          { key: "situacaoDesc", label: "Situação", width: "25%" },
         ]}
         onSelect={(item) => {
           if (item) handleSelect(item);

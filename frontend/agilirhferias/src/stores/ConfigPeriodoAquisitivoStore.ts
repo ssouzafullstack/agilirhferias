@@ -2,6 +2,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { createBaseState } from "./createBaseState";
 import type { RootStore } from "./RootStore";
 import api from "../services/api";
+import { formatDateBR } from "../utils/formatUtils";
+import type { ComboboxDto } from "../services/ComboboxDto";
 
 export interface ConfigPeriodoAquisitivoDto {
   id: string;
@@ -9,7 +11,7 @@ export interface ConfigPeriodoAquisitivoDto {
   descricao: string;
   numeroMesesTrabalhados: number;
   numeroDiasGozo: number;
-  inicioVigencia: string;
+  inicioVigencia: Date | null | undefined;
 }
 
 export interface ConfigPeriodoAquisitivoForCreateDto {
@@ -35,6 +37,7 @@ export class ConfigPeriodoAquisitivoStore {
   configsPeriodoAquisitivo: ConfigPeriodoAquisitivoDto[] = [];
   configPeriodoAquisitivoForUpdate: ConfigPeriodoAquisitivoForUpdateDto | null =
     null;
+  combobox: ComboboxDto[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -43,8 +46,23 @@ export class ConfigPeriodoAquisitivoStore {
   async getAll() {
     await this.base.execute(async () => {
       const { data } = await api.get("/configPeriodoAquisitivo");
+      const formatted = data.map((item: ConfigPeriodoAquisitivoDto) => ({
+        ...item,
+        inicioVigencia: formatDateBR(item.inicioVigencia!),
+      }));
       runInAction(() => {
-        this.configsPeriodoAquisitivo = data;
+        this.configsPeriodoAquisitivo = formatted;
+      });
+    });
+  }
+  
+  async getCombobox() {
+    await this.base.execute(async () => {
+      const { data } = await api.get<ComboboxDto[]>(
+        "/configPeriodoAquisitivo/combobox"
+      );
+      runInAction(() => {
+        this.combobox = data;
       });
     });
   }
@@ -67,7 +85,10 @@ export class ConfigPeriodoAquisitivoStore {
 
   async update(configPeriodoAquisitivo: ConfigPeriodoAquisitivoForUpdateDto) {
     await this.base.execute(async () => {
-      await api.put(`/configPeriodoAquisitivo/${configPeriodoAquisitivo.id}`, configPeriodoAquisitivo);
+      await api.put(
+        `/configPeriodoAquisitivo/${configPeriodoAquisitivo.id}`,
+        configPeriodoAquisitivo
+      );
       await this.getAll();
     });
   }

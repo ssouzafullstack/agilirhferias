@@ -14,7 +14,7 @@ import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/StoreContext";
 import type { ConfigCalculoFeriasForUpdateDto } from "../../stores/ConfigCalculoFeriasStore";
-import { formatDateBR } from "../../utils/formatDateBR";
+import { formatDateBR } from "../../utils/formatUtils";
 
 const useStyles = makeStyles({
   container: {

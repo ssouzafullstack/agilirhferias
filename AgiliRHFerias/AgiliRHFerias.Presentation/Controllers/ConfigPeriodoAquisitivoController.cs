@@ -28,6 +28,13 @@ namespace AgiliRHFerias.Presentation.Controllers
             return Ok(result);
         }
 
+        [HttpGet("combobox")]
+        public async Task<IActionResult> GetCombobox()
+        {
+            var result = await _service.ConfigPeriodoAquisitivoService.GetComboboxAsync(trackChanges: false);
+            return Ok(result);
+        }
+
         [HttpGet("{id:guid}", Name = "Get")]
         public async Task<IActionResult> Get(Guid id)
         {

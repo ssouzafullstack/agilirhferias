@@ -10,7 +10,8 @@ namespace AgiliRHFerias.Shared.DataTransferObjects.Colaboradores
         public decimal Salario { get; set; }
         public DateTime DataAdmissao { get; set; }
         public DateTime? DataDesligamento { get; set; }
-        public string PeriodoAquisitivo { get; set; } = string.Empty;
+        public DateTime? InicioPeriodoAquisitivo { get; set; }
+        public DateTime? FimPeriodoAquisitivo { get; set; }
         public SituacaoColaborador Situacao { get; set; }
     }
 }

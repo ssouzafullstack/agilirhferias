@@ -9,16 +9,13 @@ import {
   Button,
   Input,
   Label,
-  SpinButton,
-  Checkbox,
   Select,
-  Option,
   makeStyles,
 } from "@fluentui/react-components";
 import { DatePicker } from "@fluentui/react-datepicker-compat";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
-import type { CargoForCreateDto, SituacaoCargo } from "../stores/CargoStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import type { CargoForCreateDto } from "../stores/CargoStore";
+import { formatDateBR } from "../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {
@@ -55,7 +52,7 @@ const initialFormData: CargoForCreateDto = {
   cbo: "",
   gerenciaSupervisao: false,
   inicioVigencia: undefined,
-  situacao: "",
+  situacao: 1,
 };
 
 export function AddCargoDialog({
@@ -99,17 +96,6 @@ export function AddCargoDialog({
           <DialogContent>
             <form className={styles.form}>
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Código:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={formData.codigo ?? 0}
-                  onChange={(_, d) =>
-                    handleChange("codigo", Number(d.value) || null)
-                  }
-                />
-              </div>
-
-              <div className={styles.fieldRow}>
                 <Label className={styles.label}>Nome:</Label>
                 <Input
                   className={styles.input}
@@ -118,15 +104,22 @@ export function AddCargoDialog({
                   placeholder="Ex: Analista de RH"
                 />
               </div>
-
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Nível:</Label>
-                <Input
+                <Select
                   className={styles.input}
                   value={formData.nivelCargo}
-                  onChange={(_, d) => handleChange("nivelCargo", d.value ?? "")}
-                  placeholder="Ex: Júnior / Pleno / Sênior"
-                />
+                  onChange={(_, data) => handleChange("nivelCargo", data.value)}
+                >
+                  <option value="1">Junior I</option>
+                  <option value="2">Junior II</option>
+                  <option value="3">Pleno I</option>
+                  <option value="4">Pleno II</option>
+                  <option value="5">Senior I</option>
+                  <option value="6">Senior II</option>
+                  <option value="7">Master I</option>
+                  <option value="8">Master II</option>
+                </Select>
               </div>
 
               <div className={styles.fieldRow}>
@@ -138,17 +131,6 @@ export function AddCargoDialog({
                   placeholder="Ex: 2524-05"
                 />
               </div>
-
-              <div className={styles.fieldRow}>
-                <Checkbox
-                  label="Gerência / Supervisão"
-                  checked={formData.gerenciaSupervisao}
-                  onChange={(_, data) =>
-                    handleChange("gerenciaSupervisao", Boolean(data.checked))
-                  }
-                />
-              </div>
-
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Início de vigência:</Label>
                 <DatePicker
@@ -165,14 +147,13 @@ export function AddCargoDialog({
                 <Label className={styles.label}>Situação:</Label>
                 <Select
                   className={styles.input}
-                  value={formData.situacao}
+                  value={String(formData.situacao)}
                   onChange={(_, data) =>
-                    handleChange("situacao", data.value as SituacaoCargo)
+                    handleChange("situacao", Number(data.value))
                   }
                 >
-                  <Option value="">Selecione</Option>
-                  <Option value="Ativo">Ativo</Option>
-                  <Option value="Inativo">Inativo</Option>
+                  <option value="1">Ativa</option>
+                  <option value="2">Inativa</option>
                 </Select>
               </div>
             </form>

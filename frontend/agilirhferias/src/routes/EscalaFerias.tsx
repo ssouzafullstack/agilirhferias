@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { AddEscalaFeriasDialog } from "../EscalaFerias/AddEscalaFeriasDialog";
 import EditEscalaFeriasDialog from "../EscalaFerias/EditEscalaFeriasDialog";
 import { DeleteEscalaFeriasDialog } from "../EscalaFerias/DeleteEscalaFeriasDialog";
+import { formatDateBR, formatSituacaoFerias } from "../utils/formatUtils";
 
 const EscalaFerias = observer(() => {
   const { escalaFeriasStore } = useStore();
@@ -56,18 +57,42 @@ const EscalaFerias = observer(() => {
         actions
         data={escalaFeriasStore.escalas}
         columns={[
-          { key: "colaborador", label: "Colaborador", width: "25%" },
-          { key: "dataAdmissao", label: "Admissão", width: "10%" },
+          { key: "nomeColaborador", label: "Colaborador", width: "25%" },
           {
-            key: "periodoAquisitivo",
+            key: "dataAdmissao",
+            label: "Admissão",
+            width: "10%",
+            render: (item) => formatDateBR(item.dataAdmissao),
+          },
+          {
+            key: "inicioPeriodoAquisitivo",
             label: "Período Aquisitivo",
             width: "15%",
+            render: (item) =>
+              `${formatDateBR(item.inicioPeriodoAquisitivo)} - ${formatDateBR(
+                item.fimPeriodoAquisitivo
+              )}`,
           },
           { key: "numeroDiasGozo", label: "Dias Gozo", width: "10%" },
           { key: "numeroDiasAbono", label: "Dias Abono", width: "10%" },
-          { key: "inicioFerias", label: "Início", width: "10%" },
-          { key: "fimFerias", label: "Fim", width: "10%" },
-          { key: "situacao", label: "Situação", width: "10%" },
+          {
+            key: "inicioFerias",
+            label: "Início",
+            width: "10%",
+            render: (item) => formatDateBR(item.inicioFerias),
+          },
+          {
+            key: "fimFerias",
+            label: "Fim",
+            width: "10%",
+            render: (item) => formatDateBR(item.fimFerias),
+          },
+          {
+            key: "situacao",
+            label: "Situação",
+            width: "10%",
+            render: (item) => formatSituacaoFerias(item.situacao),
+          },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}
         onAdd={() => setAddDialogOpen(true)}
@@ -99,7 +124,7 @@ const EscalaFerias = observer(() => {
       <DeleteEscalaFeriasDialog
         open={isDeleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
-        item={selectedItem?.colaborador}
+        item={selectedItem?.nomeColaborador}
         onConfirm={handleDelete}
       />
     </div>

@@ -11,6 +11,11 @@ import { useEffect, useState } from "react";
 import { AddColaboradorDialog } from "../Colaborador/AddColaboradorDialog";
 import EditColaboradorDialog from "../Colaborador/EditColaboradorDialog";
 import { DeleteColaboradorDialog } from "../Colaborador/DeleteColaboradorDialog";
+import {
+  formatCurrency,
+  formatDateBR,
+  formatSituacao,
+} from "../utils/formatUtils";
 
 const Colaborador = observer(() => {
   const { colaboradorStore } = useStore();
@@ -56,21 +61,40 @@ const Colaborador = observer(() => {
         actions
         data={colaboradorStore.colaboradores}
         columns={[
-          { key: "matricula", label: "Matrícula", width: "10%" },
           { key: "nome", label: "Nome", width: "30%" },
-          { key: "dataAdmissao", label: "Admissão", width: "10%" },
-          { key: "dataDesligamento", label: "Desligamento", width: "10%" },
+          {
+            key: "salario",
+            label: "Salário",
+            width: "10%",
+            render: (item) => formatCurrency(item.salario),
+          },
+          {
+            key: "dataAdmissao",
+            label: "Admissão",
+            width: "10%",
+            render: (item) => formatDateBR(item.dataAdmissao),
+          },
+          {
+            key: "dataDesligamento",
+            label: "Desligamento",
+            width: "10%",
+            render: (item) => formatDateBR(item.dataDesligamento),
+          },
           {
             key: "inicioPeriodoAquisitivo",
-            label: "Início Período",
-            width: "10%",
+            label: "Período Aquisitivo",
+            width: "20%",
+            render: (item) =>
+              `${formatDateBR(item.inicioPeriodoAquisitivo)} - ${formatDateBR(
+                item.fimPeriodoAquisitivo
+              )}`,
           },
           {
-            key: "fimPeriodoAquisitivo",
-            label: "Fim Período",
+            key: "situacao",
+            label: "Situação",
             width: "10%",
+            render: (item) => formatSituacao(item.situacao),
           },
-          { key: "situacao", label: "Situação", width: "10%" },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}
         onAdd={() => setAddDialogOpen(true)}

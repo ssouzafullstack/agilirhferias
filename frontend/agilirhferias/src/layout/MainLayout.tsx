@@ -68,18 +68,6 @@ export default function MainLayout() {
             Login
           </Button>
           <Button
-            appearance={location.pathname === "/" ? "primary" : "subtle"}
-            onClick={() => navigate("/")}
-          >
-            Início
-          </Button>
-          <Button
-            appearance={location.pathname === "/about" ? "primary" : "subtle"}
-            onClick={() => navigate("/about")}
-          >
-            Sobre
-          </Button>
-          <Button
             appearance={
               location.pathname === "/parameters" ? "primary" : "subtle"
             }

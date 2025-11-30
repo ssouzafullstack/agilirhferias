@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/StoreContext";
 import type { ConfigPeriodoAquisitivoForUpdateDto } from "../../stores/ConfigPeriodoAquisitivoStore";
-import { formatDateBR } from "../../utils/formatDateBR";
+import { formatDateBR } from "../../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {

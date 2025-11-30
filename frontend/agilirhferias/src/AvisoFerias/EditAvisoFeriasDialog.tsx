@@ -6,11 +6,9 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Input,
   Label,
   SpinButton,
   Select,
-  Option,
   Textarea,
   makeStyles,
 } from "@fluentui/react-components";
@@ -19,11 +17,8 @@ import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/StoreContext";
-import type {
-  AvisoFeriasForUpdateDto,
-  SituacaoAvisoFerias,
-} from "../stores/AvisoFeriasStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import type { AvisoFeriasForUpdateDto } from "../stores/AvisoFeriasStore";
+import { formatDateBR } from "../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {
@@ -32,6 +27,11 @@ const useStyles = makeStyles({
     marginBottom: "12px",
     flexWrap: "wrap",
     alignItems: "center",
+  },
+  fieldGroup: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
   label: {
     minWidth: "160px",
@@ -55,11 +55,17 @@ interface EditAvisoFeriasDialogProps {
 }
 
 const EditAvisoFeriasDialog = observer(
-  ({ open, selectedItem, onOpenChange, onSave }: EditAvisoFeriasDialogProps) => {
+  ({
+    open,
+    selectedItem,
+    onOpenChange,
+    onSave,
+  }: EditAvisoFeriasDialogProps) => {
     const styles = useStyles();
-    const { avisoFeriasStore } = useStore();
+    const { avisoFeriasStore, colaboradorStore } = useStore();
 
     useEffect(() => {
+      colaboradorStore.getCombobox();
       if (open && selectedItem) {
         if (avisoFeriasStore.avisoForUpdate?.id !== selectedItem) {
           avisoFeriasStore.get(selectedItem);
@@ -104,19 +110,24 @@ const EditAvisoFeriasDialog = observer(
             <DialogContent>
               {dto ? (
                 <form className={styles.form}>
-                  {/* Colaborador */}
                   <div className={styles.fieldRow}>
                     <Label className={styles.label}>Colaborador:</Label>
-                    <Input
+                    <Select
                       className={styles.input}
-                      value={dto.colaborador ?? ""}
-                      onChange={(_, d) =>
-                        handleChange("colaborador", d.value ?? "")
+                      value={dto?.idColaborador}
+                      onChange={(_, data) =>
+                        handleChange("idColaborador", data.value)
                       }
-                    />
+                    >
+                      <option value="">Selecione...</option>
+                      {colaboradorStore.combobox.map((opt) => (
+                        <option key={opt.id} value={opt.id}>
+                          {opt.descricao}
+                        </option>
+                      ))}
+                    </Select>
                   </div>
 
-                  {/* Data admissão */}
                   <div className={styles.fieldRow}>
                     <Label className={styles.label}>Data admissão:</Label>
                     <DatePicker
@@ -132,163 +143,179 @@ const EditAvisoFeriasDialog = observer(
                     />
                   </div>
 
-                  {/* Período aquisitivo */}
                   <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Período aquisitivo:</Label>
-                    <Input
-                      className={styles.input}
-                      value={dto.periodoAquisitivo ?? ""}
-                      onChange={(_, d) =>
-                        handleChange("periodoAquisitivo", d.value ?? "")
-                      }
-                    />
-                  </div>
-
-                  {/* Dias gozo / abono */}
-                  <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Dias de gozo:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.diasGozo ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "diasGozo",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
-
-                    <Label className={styles.label}>Dias de abono:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.diasAbono ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "diasAbono",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
-                  </div>
-
-                  {/* Faltas / Dias disponíveis */}
-                  <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Faltas:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.faltas ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "faltas",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
-
-                    <Label className={styles.label}>Dias disponíveis:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.diasDisponiveis ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "diasDisponiveis",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
-                  </div>
-
-                  {/* Datas início / fim */}
-                  <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Data início:</Label>
-                    <DatePicker
-                      formatDate={formatDateBR}
-                      value={
-                        dto.dataInicio
-                          ? new Date(dto.dataInicio as any)
-                          : undefined
-                      }
-                      onSelectDate={(date) =>
-                        handleChange("dataInicio", date ?? null)
-                      }
-                    />
-
-                    <Label className={styles.label}>Data fim:</Label>
-                    <DatePicker
-                      formatDate={formatDateBR}
-                      value={
-                        dto.dataFim
-                          ? new Date(dto.dataFim as any)
-                          : undefined
-                      }
-                      onSelectDate={(date) =>
-                        handleChange("dataFim", date ?? null)
-                      }
-                    />
-                  </div>
-
-                  {/* Situação */}
-                  <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Situação:</Label>
-                    <Select
-                      className={styles.input}
-                      value={dto.situacao ?? ""}
-                      onChange={(_, data) =>
-                        handleChange(
-                          "situacao",
-                          data.value as SituacaoAvisoFerias
-                        )
-                      }
-                    >
-                      <Option value="">Selecione</Option>
-                      <Option value="Programada">Programada</Option>
-                      <Option value="Homologada">Homologada</Option>
-                      <Option value="Cancelada">Cancelada</Option>
-                    </Select>
-                  </div>
-
-                  {/* Salário / Adicional / Total */}
-                  <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Salário:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.salario ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "salario",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>
+                        Início período aquisitivo:
+                      </Label>
+                      <DatePicker
+                        formatDate={formatDateBR}
+                        value={
+                          dto.inicioPeriodoAquisitivo
+                            ? new Date(dto.inicioPeriodoAquisitivo as any)
+                            : undefined
+                        }
+                        onSelectDate={(date) =>
+                          handleChange("inicioPeriodoAquisitivo", date ?? null)
+                        }
+                      />
+                    </div>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>
+                        Fim período aquisitivo:
+                      </Label>
+                      <DatePicker
+                        formatDate={formatDateBR}
+                        value={
+                          dto.fimPeriodoAquisitivo
+                            ? new Date(dto.fimPeriodoAquisitivo as any)
+                            : undefined
+                        }
+                        onSelectDate={(date) =>
+                          handleChange("fimPeriodoAquisitivo", date ?? null)
+                        }
+                      />
+                    </div>
                   </div>
 
                   <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Adicional férias:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.adicionalFerias ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "adicionalFerias",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Dias de gozo:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.numeroDiasGozo ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("numeroDiasGozo", Number(value));
+                        }}
+                      />
+                    </div>
 
-                    <Label className={styles.label}>Total férias:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.totalPagamentoFerias ?? 0}
-                      onChange={(_, d) =>
-                        handleChange(
-                          "totalPagamentoFerias",
-                          d.value ? Number(d.value) || null : null
-                        )
-                      }
-                    />
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Dias de abono:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.numeroDiasAbono ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("numeroDiasAbono", Number(value));
+                        }}
+                      />
+                    </div>
                   </div>
 
-                  {/* Observação */}
+                  <div className={styles.fieldRow}>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Faltas:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.faltas ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("faltas", Number(value));
+                        }}
+                      />
+                    </div>
+
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Dias disponíveis:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.numeroDiasDisponiveis ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("numeroDiasDisponiveis", Number(value));
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.fieldRow}>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Data início:</Label>
+                      <DatePicker
+                        formatDate={formatDateBR}
+                        value={
+                          dto.inicioFerias
+                            ? new Date(dto.inicioFerias as any)
+                            : undefined
+                        }
+                        onSelectDate={(date) =>
+                          handleChange("inicioFerias", date ?? null)
+                        }
+                      />
+                    </div>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Data fim:</Label>
+                      <DatePicker
+                        formatDate={formatDateBR}
+                        value={
+                          dto.fimFerias
+                            ? new Date(dto.fimFerias as any)
+                            : undefined
+                        }
+                        onSelectDate={(date) =>
+                          handleChange("fimFerias", date ?? null)
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.fieldRow}></div>
+                  <div className={styles.fieldRow}>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Situação:</Label>
+                      <Select
+                        className={styles.input}
+                        value={String(dto.situacao)}
+                        onChange={(_, data) =>
+                          handleChange("situacao", Number(data.value))
+                        }
+                      >
+                        <option value="1">Programada</option>
+                        <option value="2">Homologada</option>
+                        <option value="3">Cancelada</option>
+                      </Select>
+                    </div>
+
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Salário R$:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.salario ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("salario", Number(value));
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.fieldRow}>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Adicional férias:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.adicionalFerias ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("adicionalFerias", Number(value));
+                        }}
+                      />
+                    </div>
+                    <div className={styles.fieldGroup}>
+                      <Label className={styles.label}>Total férias:</Label>
+                      <SpinButton
+                        className={styles.input}
+                        value={dto.totalPagamentoFerias ?? 0}
+                        onChange={(_, d) => {
+                          const value = d.displayValue ?? "0";
+                          handleChange("totalPagamentoFerias", Number(value));
+                        }}
+                      />
+                    </div>
+                  </div>
+
                   <div className={styles.fieldRow}>
                     <Label className={styles.label}>Observação:</Label>
                     <Textarea

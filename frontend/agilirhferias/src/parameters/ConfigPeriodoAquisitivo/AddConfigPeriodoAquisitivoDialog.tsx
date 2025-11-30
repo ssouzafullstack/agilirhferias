@@ -16,7 +16,7 @@ import {
 import { DatePicker } from "@fluentui/react-datepicker-compat";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import type { ConfigPeriodoAquisitivoForCreateDto } from "../../stores/ConfigPeriodoAquisitivoStore";
-import { formatDateBR } from "../../utils/formatDateBR";
+import { formatDateBR } from "../../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {

@@ -2,18 +2,17 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { createBaseState } from "./createBaseState";
 import type { RootStore } from "./RootStore";
 import api from "../services/api";
-
-export type SituacaoCargo = "" | "Ativo" | "Inativo";
+import type { ComboboxDto } from "../services/ComboboxDto";
 
 export interface CargoDto {
   id: string;
   codigo: number;
   descricao: string;
-  nivelCargo: string;
+  nivelCargo: number;
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: string;
-  situacao: "Ativo" | "Inativo";
+  situacao: number;
 }
 
 export interface CargoForCreateDto {
@@ -23,7 +22,7 @@ export interface CargoForCreateDto {
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: Date | null | undefined;
-  situacao: SituacaoCargo;
+  situacao: number;
 }
 
 export interface CargoForUpdateDto {
@@ -34,7 +33,7 @@ export interface CargoForUpdateDto {
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: Date | null | undefined;
-  situacao: SituacaoCargo;
+  situacao: number;
 }
 
 export class CargoStore {
@@ -42,6 +41,7 @@ export class CargoStore {
   base = createBaseState();
   cargos: CargoDto[] = [];
   cargoForUpdate: CargoForUpdateDto | null = null;
+  combobox: ComboboxDto[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -52,6 +52,15 @@ export class CargoStore {
       const { data } = await api.get("/cargo");
       runInAction(() => {
         this.cargos = data;
+      });
+    });
+  }
+
+  async getCombobox() {
+    await this.base.execute(async () => {
+      const { data } = await api.get<ComboboxDto[]>("/cargo/combobox");
+      runInAction(() => {
+        this.combobox = data;
       });
     });
   }

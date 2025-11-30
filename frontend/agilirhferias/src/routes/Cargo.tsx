@@ -11,6 +11,11 @@ import { useEffect, useState } from "react";
 import { AddCargoDialog } from "../Cargo/AddCargoDialog";
 import EditCargoDialog from "../Cargo/EditCargoDialog";
 import { DeleteCargoDialog } from "../Cargo/DeleteCargoDialog";
+import {
+  formatDateBR,
+  formatNivelCargo,
+  formatSituacao,
+} from "../utils/formatUtils";
 
 const Cargo = observer(() => {
   const { cargoStore } = useStore();
@@ -62,21 +67,26 @@ const Cargo = observer(() => {
         actions={true}
         data={cargoStore.cargos}
         columns={[
-          { key: "codigo", label: "Código", width: "10%" },
-          { key: "descricao", label: "Nome", width: "25%" },
-          { key: "nivelCargo", label: "Nível", width: "15%" },
-          { key: "cbo", label: "CBO", width: "10%" },
+          { key: "descricao", label: "Descrição", width: "20%" },
           {
-            key: "gerenciaSupervisao",
-            label: "Gerência/Supervisão",
-            width: "15%",
+            key: "nivelCargo",
+            label: "Nível",
+            width: "20%",
+            render: (item) => formatNivelCargo(item.nivelCargo),
           },
+          { key: "cbo", label: "CBO", width: "20%" },
           {
             key: "inicioVigencia",
             label: "Início de Vigência",
-            width: "15%",
+            width: "20%",
+            render: (item) => formatDateBR(item.inicioVigencia),
           },
-          { key: "situacao", label: "Situação", width: "10%" },
+          {
+            key: "situacao",
+            label: "Situação",
+            width: "20%",
+            render: (item) => formatSituacao(item.situacao),
+          },
         ]}
         onSelect={(item) => {
           if (item) handleSelect(item);

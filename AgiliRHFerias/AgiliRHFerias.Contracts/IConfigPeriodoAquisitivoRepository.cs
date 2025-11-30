@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AgiliRHFerias.Contracts
 {
-    public interface IConfigPeriodoAquisitivoRepository
+    public interface IConfigPeriodoAquisitivoRepository : IRepositoryBase<ConfigPeriodoAquisitivo>
     {
         Task<IEnumerable<ConfigPeriodoAquisitivo>> GetAllAsync(bool trackChanges);
         Task<ConfigPeriodoAquisitivo> GetAsync(Guid id, bool trackChanges);

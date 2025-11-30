@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import Home from "./routes/Home";
-import About from "./routes/About";
 import NotFound from "./routes/NotFound";
 import Login from "./routes/Login";
 import Parameters from "./routes/Parameters";
@@ -17,7 +16,6 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
         <Route path="login" element={<Login />} />
         <Route path="parameters" element={<Parameters />} />
         <Route path="empresas" element={<Empresa />} />

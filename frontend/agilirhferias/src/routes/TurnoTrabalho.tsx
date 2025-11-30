@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { AddTurnoTrabalhoDialog } from "../TurnoTrabalho/AddTurnoTrabalhoDialog";
 import EditTurnoTrabalhoDialog from "../TurnoTrabalho/EditTurnoTrabalhoDialog";
 import { DeleteTurnoTrabalhoDialog } from "../TurnoTrabalho/DeleteTurnoTrabalhoDialog";
+import { formatDateBR, formatSituacao } from "../utils/formatUtils";
 
 const TurnoTrabalho = observer(() => {
   const { turnoTrabalhoStore } = useStore();
@@ -41,8 +42,7 @@ const TurnoTrabalho = observer(() => {
     }
   };
 
-  if (turnoTrabalhoStore.base.loading)
-    return <Spinner label="Carregando..." />;
+  if (turnoTrabalhoStore.base.loading) return <Spinner label="Carregando..." />;
   if (turnoTrabalhoStore.base.error)
     return <Text>{turnoTrabalhoStore.base.error}</Text>;
 
@@ -56,14 +56,23 @@ const TurnoTrabalho = observer(() => {
         actions
         data={turnoTrabalhoStore.turnos}
         columns={[
-          { key: "codigo", label: "Código", width: "10%" },
           { key: "descricao", label: "Descrição", width: "20%" },
           { key: "entrada1", label: "Entrada 1", width: "10%" },
           { key: "saida1", label: "Saída 1", width: "10%" },
           { key: "entrada2", label: "Entrada 2", width: "10%" },
           { key: "saida2", label: "Saída 2", width: "10%" },
-          { key: "inicioVigencia", label: "Início Vigência", width: "15%" },
-          { key: "situacao", label: "Situação", width: "10%" },
+          {
+            key: "inicioVigencia",
+            label: "Início Vigência",
+            width: "15%",
+            render: (item) => formatDateBR(item.inicioVigencia),
+          },
+          {
+            key: "situacao",
+            label: "Situação",
+            width: "10%",
+            render: (item) => formatSituacao(item.situacao),
+          },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}
         onAdd={() => setAddDialogOpen(true)}

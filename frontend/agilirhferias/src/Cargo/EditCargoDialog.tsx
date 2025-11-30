@@ -8,10 +8,7 @@ import {
   Button,
   Input,
   Label,
-  SpinButton,
-  Checkbox,
   Select,
-  Option,
   makeStyles,
 } from "@fluentui/react-components";
 import { DatePicker } from "@fluentui/react-datepicker-compat";
@@ -19,8 +16,8 @@ import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../stores/StoreContext";
-import type { CargoForUpdateDto, SituacaoCargo } from "../stores/CargoStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import type { CargoForUpdateDto } from "../stores/CargoStore";
+import { formatDateBR } from "../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {
@@ -102,34 +99,34 @@ const EditCargoDialog = observer(
               {dto ? (
                 <form className={styles.form}>
                   <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Código:</Label>
-                    <SpinButton
-                      className={styles.input}
-                      value={dto.codigo ?? 0}
-                      onChange={(_, d) =>
-                        handleChange("codigo", Number(d.value) || null)
-                      }
-                    />
-                  </div>
-
-                  <div className={styles.fieldRow}>
                     <Label className={styles.label}>Descrição:</Label>
                     <Input
                       className={styles.input}
                       value={dto.descricao ?? ""}
-                      onChange={(_, d) => handleChange("descricao", d.value ?? "")}
+                      onChange={(_, d) =>
+                        handleChange("descricao", d.value ?? "")
+                      }
                       placeholder="Ex: Analista de RH"
                     />
                   </div>
-
                   <div className={styles.fieldRow}>
                     <Label className={styles.label}>Nível:</Label>
-                    <Input
+                    <Select
                       className={styles.input}
-                      value={dto.nivelCargo ?? ""}
-                      onChange={(_, d) => handleChange("nivelCargo", d.value ?? "")}
-                      placeholder="Ex: Júnior / Pleno / Sênior"
-                    />
+                      value={dto.nivelCargo}
+                      onChange={(_, data) =>
+                        handleChange("nivelCargo", data.value)
+                      }
+                    >
+                      <option value="1">Junior I</option>
+                      <option value="2">Junior II</option>
+                      <option value="3">Pleno I</option>
+                      <option value="4">Pleno II</option>
+                      <option value="5">Senior I</option>
+                      <option value="6">Senior II</option>
+                      <option value="7">Master I</option>
+                      <option value="8">Master II</option>
+                    </Select>
                   </div>
 
                   <div className={styles.fieldRow}>
@@ -141,20 +138,6 @@ const EditCargoDialog = observer(
                       placeholder="Ex: 2524-05"
                     />
                   </div>
-
-                  <div className={styles.fieldRow}>
-                    <Checkbox
-                      label="Gerência / Supervisão"
-                      checked={dto.gerenciaSupervisao ?? false}
-                      onChange={(_, data) =>
-                        handleChange(
-                          "gerenciaSupervisao",
-                          Boolean(data.checked)
-                        )
-                      }
-                    />
-                  </div>
-
                   <div className={styles.fieldRow}>
                     <Label className={styles.label}>Início de vigência:</Label>
                     <DatePicker
@@ -175,14 +158,13 @@ const EditCargoDialog = observer(
                     <Label className={styles.label}>Situação:</Label>
                     <Select
                       className={styles.input}
-                      value={dto.situacao ?? ""}
+                      value={String(dto.situacao)}
                       onChange={(_, data) =>
-                        handleChange("situacao", data.value as SituacaoCargo)
+                        handleChange("situacao", Number(data.value))
                       }
                     >
-                      <Option value="">Selecione</Option>
-                      <Option value="Ativo">Ativo</Option>
-                      <Option value="Inativo">Inativo</Option>
+                      <option value="1">Ativa</option>
+                      <option value="2">Inativa</option>
                     </Select>
                   </div>
                 </form>

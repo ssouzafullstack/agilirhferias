@@ -10,9 +10,8 @@ namespace AgiliRHFerias.Repository
 {
     internal class ColaboradorRepository : RepositoryBase<Colaborador>, IColaboradorRepository
     {
-        public ColaboradorRepository(RepositoryContext repositoryContext) : base(repositoryContext)
-        {
-        }
+        public ColaboradorRepository(RepositoryContext repositoryContext)
+            : base(repositoryContext) { }
 
         public async Task<IEnumerable<Colaborador>> GetAllAsync(bool trackChanges)
         {

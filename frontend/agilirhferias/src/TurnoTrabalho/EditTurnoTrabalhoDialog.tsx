@@ -21,7 +21,7 @@ import type {
   TurnoTrabalhoForUpdateDto,
   SituacaoTurno,
 } from "../stores/TurnoTrabalhoStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import { formatDateBR } from "../utils/formatUtils";
 
 const useStyles = makeStyles({
   fieldRow: {

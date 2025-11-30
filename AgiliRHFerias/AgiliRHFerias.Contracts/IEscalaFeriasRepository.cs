@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AgiliRHFerias.Contracts
 {
-    public interface IEscalaFeriasRepository
+    public interface IEscalaFeriasRepository : IRepositoryBase<EscalaFerias>
     {
         Task<IEnumerable<EscalaFerias>> GetAllAsync(bool trackChanges);
         Task<EscalaFerias> GetAsync(Guid id, bool trackChanges);

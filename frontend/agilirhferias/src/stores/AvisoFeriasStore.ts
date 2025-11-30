@@ -3,41 +3,33 @@ import { createBaseState } from "./createBaseState";
 import api from "../services/api";
 import type { RootStore } from "./RootStore";
 
-export type SituacaoAvisoFerias = "" | "Programada" | "Homologada" | "Cancelada";
-
-// {
-// "id": "e5de0708-1c5e-47a6-b165-77db13f8b9f8",
-// "idEscalaFerias": "78969c57-784f-4e6e-836f-71af8d81556b",
-// "totalPagamentoFerias": 3200.00,
-// "observacao": "",
-// "situacao": 1,
-// "ultimaAlteracao": "2025-11-29T18:35:44.68"
-// },
 export interface AvisoFeriasDto {
   id: string;
-  colaborador: string;
+  nomeColaborador: string;
   dataAdmissao: string;
-  periodoAquisitivo: string;
-  diasGozo: number;
-  diasAbono: number;
-  dataInicio: string;
-  dataFim: string;
+  inicioPeriodoAquisitivo: Date | string | undefined;
+  fimPeriodoAquisitivo: Date | string | undefined;
+  numeroDiasGozo: number;
+  numeroDiasAbono: number;
+  inicioFerias: Date | string | undefined;
+  fimFerias: Date | string | undefined;
   adicionalFerias: number;
   totalPagamentoFerias: number;
-  situacao: "Programada" | "Homologada" | "Cancelada";
+  situacao: number;
 }
 
 export interface AvisoFeriasForCreateDto {
-  colaborador: string;
+  idColaborador: string;
   dataAdmissao: Date | string | null;
-  periodoAquisitivo: string;
-  diasGozo: number | null;
-  diasAbono: number | null;
+  inicioPeriodoAquisitivo: Date | string | null;
+  fimPeriodoAquisitivo: Date | string | null;
+  numeroDiasGozo: number | null;
+  numeroDiasAbono: number | null;
   faltas: number | null;
-  diasDisponiveis: number | null;
-  dataInicio: Date | string | null;
-  dataFim: Date | string | null;
-  situacao: SituacaoAvisoFerias;
+  numeroDiasDisponiveis: number | null;
+  inicioFerias: Date | string | null;
+  fimFerias: Date | string | null;
+  situacao: number;
   salario: number | null;
   adicionalFerias: number | null;
   totalPagamentoFerias: number | null;

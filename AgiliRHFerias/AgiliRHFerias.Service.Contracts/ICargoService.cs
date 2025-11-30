@@ -1,4 +1,5 @@
-﻿using AgiliRHFerias.Shared.DataTransferObjects.Cargos;
+﻿using AgiliRHFerias.Shared.DataTransferObjects;
+using AgiliRHFerias.Shared.DataTransferObjects.Cargos;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace AgiliRHFerias.Service.Contracts
     public interface ICargoService
     {
         Task<IEnumerable<CargoDto>> GetAllAsync(bool trackChanges);
+        Task<IEnumerable<ComboboxDto>> GetComboboxAsync(bool trackChanges);
         Task<CargoForUpdateDto> GetAsync(Guid id, bool trackChanges);
         Task<CargoDto> CreateAsync(CargoForCreationDto cargoForCreation);
         Task UpdateAsync(Guid id, CargoForUpdateDto cargoForUpdate, bool trackChanges);

@@ -7,21 +7,17 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Input,
   Label,
   SpinButton,
   Select,
-  Option,
   Textarea,
   makeStyles,
 } from "@fluentui/react-components";
 import { DatePicker } from "@fluentui/react-datepicker-compat";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
-import type {
-  EscalaFeriasForCreateDto,
-  SituacaoEscalaFerias,
-} from "../stores/EscalaFeriasStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import type { EscalaFeriasForCreateDto } from "../stores/EscalaFeriasStore";
+import { formatDateBR } from "../utils/formatUtils";
+import { useStore } from "../stores/StoreContext";
 
 const useStyles = makeStyles({
   fieldRow: {
@@ -30,6 +26,11 @@ const useStyles = makeStyles({
     marginBottom: "12px",
     flexWrap: "wrap",
     alignItems: "center",
+  },
+  fieldGroup: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
   label: {
     minWidth: "160px",
@@ -52,17 +53,19 @@ interface AddEscalaFeriasDialogProps {
 }
 
 const initialForm: EscalaFeriasForCreateDto = {
-  colaborador: "",
+  nomeColaborador: "",
   dataAdmissao: null,
-  periodoAquisitivo: "",
+  inicioPeriodoAquisitivo: null,
+  fimPeriodoAquisitivo: null,
   numeroDiasGozo: null,
   numeroDiasAbono: null,
   faltas: null,
-  diasDisponiveis: null,
+  numeroDiasDisponiveis: null,
   inicioFerias: null,
   fimFerias: null,
-  situacao: "",
+  situacao: 1,
   observacao: "",
+  idColaborador: "",
 };
 
 export function AddEscalaFeriasDialog({
@@ -71,6 +74,7 @@ export function AddEscalaFeriasDialog({
   onSave,
 }: AddEscalaFeriasDialogProps) {
   const styles = useStyles();
+  const { colaboradorStore } = useStore();
   const [form, setForm] = React.useState<EscalaFeriasForCreateDto>(initialForm);
 
   const handleChange = <K extends keyof EscalaFeriasForCreateDto>(
@@ -103,16 +107,22 @@ export function AddEscalaFeriasDialog({
 
           <DialogContent>
             <form className={styles.form}>
-              {/* Colaborador / Data admissão */}
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Colaborador:</Label>
-                <Input
+                <Select
                   className={styles.input}
-                  value={form.colaborador}
-                  onChange={(_, d) =>
-                    handleChange("colaborador", d.value ?? "")
+                  value={form?.idColaborador}
+                  onChange={(_, data) =>
+                    handleChange("idColaborador", data.value)
                   }
-                />
+                >
+                  <option value="">Selecione...</option>
+                  {colaboradorStore.combobox.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.descricao}
+                    </option>
+                  ))}
+                </Select>
               </div>
 
               <div className={styles.fieldRow}>
@@ -131,119 +141,139 @@ export function AddEscalaFeriasDialog({
                 />
               </div>
 
-              {/* Período aquisitivo */}
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Período aquisitivo:</Label>
-                <Input
-                  className={styles.input}
-                  value={form.periodoAquisitivo}
-                  onChange={(_, d) =>
-                    handleChange("periodoAquisitivo", d.value ?? "")
-                  }
-                  placeholder="Ex: 01/2024 - 12/2024"
-                />
-              </div>
-
-              {/* Dias Gozo / Abono / Faltas / Dias disponíveis */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Dias de gozo:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.numeroDiasGozo ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "numeroDiasGozo",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-
-                <Label className={styles.label}>Dias de abono:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.numeroDiasAbono ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "numeroDiasAbono",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>
+                    Início período aquisitivo:
+                  </Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.inicioPeriodoAquisitivo
+                        ? new Date(form.inicioPeriodoAquisitivo as any)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("inicioPeriodoAquisitivo", date ?? null)
+                    }
+                    placeholder="Selecione a data"
+                  />
+                </div>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>
+                    Fim período aquisitivo:
+                  </Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.fimPeriodoAquisitivo
+                        ? new Date(form.fimPeriodoAquisitivo as any)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("fimPeriodoAquisitivo", date ?? null)
+                    }
+                    placeholder="Selecione a data"
+                  />
+                </div>
               </div>
 
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Faltas:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.faltas ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "faltas",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias de gozo:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasGozo ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasGozo", Number(value));
+                    }}
+                  />
+                </div>
 
-                <Label className={styles.label}>Dias disponíveis:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.diasDisponiveis ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "diasDisponiveis",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias de abono:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasAbono ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasAbono", Number(value));
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* Datas início/fim */}
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Data início:</Label>
-                <DatePicker
-                  formatDate={formatDateBR}
-                  value={
-                    form.inicioFerias
-                      ? new Date(form.inicioFerias as any)
-                      : undefined
-                  }
-                  onSelectDate={(date) =>
-                    handleChange("inicioFerias", date ?? null)
-                  }
-                  placeholder="Selecione a data"
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Faltas:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.faltas ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("faltas", Number(value));
+                    }}
+                  />
+                </div>
 
-                <Label className={styles.label}>Data fim:</Label>
-                <DatePicker
-                  formatDate={formatDateBR}
-                  value={
-                    form.fimFerias ? new Date(form.fimFerias as any) : undefined
-                  }
-                  onSelectDate={(date) =>
-                    handleChange("fimFerias", date ?? null)
-                  }
-                  placeholder="Selecione a data"
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias disponíveis:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasDisponiveis ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasDisponiveis", Number(value));
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* Situação */}
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Data início:</Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.inicioFerias
+                        ? new Date(form.inicioFerias)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("inicioFerias", date ?? null)
+                    }
+                  />
+                </div>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Data fim:</Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.fimFerias ? new Date(form.fimFerias) : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("fimFerias", date ?? null)
+                    }
+                  />
+                </div>
+              </div>
+
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Situação:</Label>
                 <Select
                   className={styles.input}
-                  value={form.situacao}
+                  value={String(form.situacao)}
                   onChange={(_, data) =>
-                    handleChange("situacao", data.value as SituacaoEscalaFerias)
+                    handleChange("situacao", Number(data.value))
                   }
                 >
-                  <Option value="">Selecione</Option>
-                  <Option value="Programada">Programada</Option>
-                  <Option value="Homologada">Homologada</Option>
-                  <Option value="Cancelada">Cancelada</Option>
+                  <option value="1">Programada</option>
+                  <option value="2">Homologada</option>
+                  <option value="3">Cancelada</option>
                 </Select>
               </div>
 
-              {/* Observação */}
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Observação:</Label>
                 <Textarea

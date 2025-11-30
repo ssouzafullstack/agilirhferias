@@ -2,10 +2,13 @@
 using AgiliRHFerias.Entities.Exceptions;
 using AgiliRHFerias.Entities.Models;
 using AgiliRHFerias.Service.Contracts;
+using AgiliRHFerias.Shared.DataTransferObjects;
 using AgiliRHFerias.Shared.DataTransferObjects.Empresas;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgiliRHFerias.Service
@@ -30,6 +33,16 @@ namespace AgiliRHFerias.Service
             var entities = await _repository.Empresa.GetAllAsync(trackChanges);
             var dtos = _mapper.Map<IEnumerable<EmpresaDto>>(entities);
             return dtos;
+        }
+
+        public async Task<IEnumerable<ComboboxDto>> GetComboboxAsync(bool trackChanges)
+        {
+            var result = await _repository.Empresa
+                                          .FindAll(trackChanges)
+                                          .OrderBy(c => c.RazaoSocial)
+                                          .Select(c => new ComboboxDto(c.Id, c.RazaoSocial))
+                                          .ToListAsync();
+            return result;
         }
 
         public async Task<EmpresaForUpdateDto> GetAsync(Guid id, bool trackChanges)

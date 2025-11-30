@@ -1,11 +1,16 @@
 ﻿using AgiliRHFerias.Contracts;
+using AgiliRHFerias.Entities.Enums;
 using AgiliRHFerias.Entities.Exceptions;
 using AgiliRHFerias.Entities.Models;
 using AgiliRHFerias.Service.Contracts;
+using AgiliRHFerias.Shared.DataTransferObjects;
 using AgiliRHFerias.Shared.DataTransferObjects.Colaboradores;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AgiliRHFerias.Service
@@ -27,21 +32,36 @@ namespace AgiliRHFerias.Service
 
         public async Task<IEnumerable<ColaboradorDto>> GetAllAsync(bool trackChanges)
         {
-            var entities = await _repository.Colaborador.GetAllAsync(trackChanges);
-            var dtos = _mapper.Map<IEnumerable<ColaboradorDto>>(entities);
+            var dtos = await _repository.Colaborador
+                                        .FindAll(trackChanges)
+                                        .ProjectTo<ColaboradorDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
             return dtos;
+        }
+
+        public async Task<IEnumerable<ComboboxDto>> GetComboboxAsync(bool trackChanges)
+        {
+            var result = await _repository.Colaborador
+                                          .FindAll(trackChanges)
+                                          .OrderBy(c => c.Nome)
+                                          .Select(c => new ComboboxDto(c.Id, c.Nome))
+                                          .ToListAsync();
+            return result;
         }
 
         public async Task<ColaboradorForUpdateDto> GetAsync(Guid id, bool trackChanges)
         {
-            Colaborador entity = await _repository.Colaborador.GetAsync(id, trackChanges);
-            var dto = _mapper.Map<ColaboradorForUpdateDto>(entity);
+            ColaboradorForUpdateDto dto = await _repository.Colaborador
+                                                  .FindByCondition(e => e.Id.Equals(id), trackChanges)
+                                                  .ProjectTo<ColaboradorForUpdateDto>(_mapper.ConfigurationProvider)
+                                                  .SingleOrDefaultAsync();
             return dto;
         }
 
         public async Task<ColaboradorDto> CreateAsync(ColaboradorForCreationDto colaboradorForCreation)
         {
             var entity = _mapper.Map<Colaborador>(colaboradorForCreation);
+            CreatePeriodoAquisitivo(entity);
             await GetCurrentUserAsync(entity);
 
             _repository.Colaborador.CreateEntity(entity);
@@ -49,6 +69,17 @@ namespace AgiliRHFerias.Service
 
             var dto = _mapper.Map<ColaboradorDto>(entity);
             return dto;
+        }
+
+        private void CreatePeriodoAquisitivo(Colaborador entity)
+        {
+            PeriodoAquisitivo periodoAquisitivo = new PeriodoAquisitivo
+            {
+                DataInicio = entity.DataAdmissao,
+                DataFim = entity.DataAdmissao.AddDays(1).AddMonths(12),
+                Situacao = SituacaoPeriodoAquisitivo.Situacao1
+            };
+            entity.PeriodosAquisitivos.Add(periodoAquisitivo);
         }
 
         public async Task UpdateAsync(Guid id, ColaboradorForUpdateDto colaboradorForUpdate, bool trackChanges)

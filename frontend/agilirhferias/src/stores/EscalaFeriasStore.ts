@@ -3,31 +3,35 @@ import { createBaseState } from "./createBaseState";
 import api from "../services/api";
 import type { RootStore } from "./RootStore";
 
-export type SituacaoEscalaFerias = "" | "Programada" | "Homologada" | "Cancelada";
+// export type SituacaoEscalaFerias = "" | "Programada" | "Homologada" | "Cancelada";
 
 export interface EscalaFeriasDto {
   id: string;
-  colaborador: string;
+  idColaborador: string;
+  nomeColaborador: string;
   dataAdmissao: string;
-  periodoAquisitivo: string;
+  inicioPeriodoAquisitivo: Date | string | undefined;
+  fimPeriodoAquisitivo: Date | string | undefined;
   numeroDiasGozo: number;
   numeroDiasAbono: number;
   inicioFerias: string;
   fimFerias: string;
-  situacao: "Programada" | "Homologada" | "Cancelada";
+  situacao: number;
 }
 
 export interface EscalaFeriasForCreateDto {
-  colaborador: string;
+  nomeColaborador: string;
+  idColaborador: string;
   dataAdmissao: Date | string | null;
-  periodoAquisitivo: string;
+  inicioPeriodoAquisitivo: Date | string | null;
+  fimPeriodoAquisitivo: Date | string | null;
   numeroDiasGozo: number | null;
   numeroDiasAbono: number | null;
   faltas: number | null;
-  diasDisponiveis: number | null;
+  numeroDiasDisponiveis: number | null;
   inicioFerias: Date | string | null;
   fimFerias: Date | string | null;
-  situacao: SituacaoEscalaFerias;
+  situacao: number;
   observacao: string;
 }
 

@@ -7,21 +7,17 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Input,
   Label,
   SpinButton,
   Select,
-  Option,
   Textarea,
   makeStyles,
 } from "@fluentui/react-components";
 import { DatePicker } from "@fluentui/react-datepicker-compat";
 import { Save20Regular, Dismiss20Regular } from "@fluentui/react-icons";
-import type {
-  AvisoFeriasForCreateDto,
-  SituacaoAvisoFerias,
-} from "../stores/AvisoFeriasStore";
-import { formatDateBR } from "../utils/formatDateBR";
+import type { AvisoFeriasForCreateDto } from "../stores/AvisoFeriasStore";
+import { formatDateBR } from "../utils/formatUtils";
+import { useStore } from "../stores/StoreContext";
 
 const useStyles = makeStyles({
   fieldRow: {
@@ -30,6 +26,11 @@ const useStyles = makeStyles({
     marginBottom: "12px",
     flexWrap: "wrap",
     alignItems: "center",
+  },
+  fieldGroup: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
   },
   label: {
     minWidth: "160px",
@@ -52,20 +53,21 @@ interface AddAvisoFeriasDialogProps {
 }
 
 const initialForm: AvisoFeriasForCreateDto = {
-  colaborador: "",
+  idColaborador: "",
   dataAdmissao: null,
-  periodoAquisitivo: "",
-  diasGozo: null,
-  diasAbono: null,
   faltas: null,
-  diasDisponiveis: null,
-  dataInicio: null,
-  dataFim: null,
-  situacao: "",
+  situacao: 1,
   salario: null,
   adicionalFerias: null,
   totalPagamentoFerias: null,
   observacao: "",
+  fimFerias: null,
+  fimPeriodoAquisitivo: null,
+  inicioFerias: null,
+  inicioPeriodoAquisitivo: null,
+  numeroDiasAbono: 0,
+  numeroDiasDisponiveis: 0,
+  numeroDiasGozo: 0,
 };
 
 export function AddAvisoFeriasDialog({
@@ -74,8 +76,8 @@ export function AddAvisoFeriasDialog({
   onSave,
 }: AddAvisoFeriasDialogProps) {
   const styles = useStyles();
-  const [form, setForm] =
-    React.useState<AvisoFeriasForCreateDto>(initialForm);
+  const { colaboradorStore } = useStore();
+  const [form, setForm] = React.useState<AvisoFeriasForCreateDto>(initialForm);
 
   const handleChange = <K extends keyof AvisoFeriasForCreateDto>(
     key: K,
@@ -107,16 +109,22 @@ export function AddAvisoFeriasDialog({
 
           <DialogContent>
             <form className={styles.form}>
-              {/* Colaborador / Data admissão */}
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Colaborador:</Label>
-                <Input
+                <Select
                   className={styles.input}
-                  value={form.colaborador}
-                  onChange={(_, d) =>
-                    handleChange("colaborador", d.value ?? "")
+                  value={form?.idColaborador}
+                  onChange={(_, data) =>
+                    handleChange("idColaborador", data.value)
                   }
-                />
+                >
+                  <option value="">Selecione...</option>
+                  {colaboradorStore.combobox.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.descricao}
+                    </option>
+                  ))}
+                </Select>
               </div>
 
               <div className={styles.fieldRow}>
@@ -131,178 +139,186 @@ export function AddAvisoFeriasDialog({
                   onSelectDate={(date) =>
                     handleChange("dataAdmissao", date ?? null)
                   }
-                  placeholder="Selecione a data"
-                />
-              </div>
-
-              {/* Período aquisitivo */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Período aquisitivo:</Label>
-                <Input
-                  className={styles.input}
-                  value={form.periodoAquisitivo}
-                  onChange={(_, d) =>
-                    handleChange("periodoAquisitivo", d.value ?? "")
-                  }
-                  placeholder="Ex: 01/2024 - 12/2024"
-                />
-              </div>
-
-              {/* Dias Gozo / Abono */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Dias de gozo:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.diasGozo ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "diasGozo",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-
-                <Label className={styles.label}>Dias de abono:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.diasAbono ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "diasAbono",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-              </div>
-
-              {/* Faltas / Dias disponíveis */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Faltas:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.faltas ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "faltas",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-
-                <Label className={styles.label}>Dias disponíveis:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.diasDisponiveis ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "diasDisponiveis",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-              </div>
-
-              {/* Datas início / fim */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Data início:</Label>
-                <DatePicker
-                  formatDate={formatDateBR}
-                  value={
-                    form.dataInicio
-                      ? new Date(form.dataInicio as any)
-                      : undefined
-                  }
-                  onSelectDate={(date) =>
-                    handleChange("dataInicio", date ?? null)
-                  }
-                  placeholder="Selecione a data"
-                />
-
-                <Label className={styles.label}>Data fim:</Label>
-                <DatePicker
-                  formatDate={formatDateBR}
-                  value={
-                    form.dataFim
-                      ? new Date(form.dataFim as any)
-                      : undefined
-                  }
-                  onSelectDate={(date) =>
-                    handleChange("dataFim", date ?? null)
-                  }
-                  placeholder="Selecione a data"
-                />
-              </div>
-
-              {/* Situação */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Situação:</Label>
-                <Select
-                  className={styles.input}
-                  value={form.situacao}
-                  onChange={(_, data) =>
-                    handleChange(
-                      "situacao",
-                      data.value as SituacaoAvisoFerias
-                    )
-                  }
-                >
-                  <Option value="">Selecione</Option>
-                  <Option value="Programada">Programada</Option>
-                  <Option value="Homologada">Homologada</Option>
-                  <Option value="Cancelada">Cancelada</Option>
-                </Select>
-              </div>
-
-              {/* Salário / Adicional / Total */}
-              <div className={styles.fieldRow}>
-                <Label className={styles.label}>Salário:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.salario ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "salario",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
                 />
               </div>
 
               <div className={styles.fieldRow}>
-                <Label className={styles.label}>Adicional férias:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.adicionalFerias ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "adicionalFerias",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
-
-                <Label className={styles.label}>Total férias:</Label>
-                <SpinButton
-                  className={styles.input}
-                  value={form.totalPagamentoFerias ?? 0}
-                  onChange={(_, d) =>
-                    handleChange(
-                      "totalPagamentoFerias",
-                      d.value ? Number(d.value) || null : null
-                    )
-                  }
-                />
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>
+                    Início período aquisitivo:
+                  </Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.inicioPeriodoAquisitivo
+                        ? new Date(form.inicioPeriodoAquisitivo as any)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("inicioPeriodoAquisitivo", date ?? null)
+                    }
+                  />
+                </div>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>
+                    Fim período aquisitivo:
+                  </Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.fimPeriodoAquisitivo
+                        ? new Date(form.fimPeriodoAquisitivo as any)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("fimPeriodoAquisitivo", date ?? null)
+                    }
+                  />
+                </div>
               </div>
 
-              {/* Observação */}
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias de gozo:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasGozo ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasGozo", Number(value));
+                    }}
+                  />
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias de abono:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasAbono ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasAbono", Number(value));
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Faltas:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.faltas ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("faltas", Number(value));
+                    }}
+                  />
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Dias disponíveis:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.numeroDiasDisponiveis ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("numeroDiasDisponiveis", Number(value));
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Data início:</Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.inicioFerias
+                        ? new Date(form.inicioFerias as any)
+                        : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("inicioFerias", date ?? null)
+                    }
+                  />
+                </div>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Data fim:</Label>
+                  <DatePicker
+                    formatDate={formatDateBR}
+                    value={
+                      form.fimFerias ? new Date(form.fimFerias as any) : undefined
+                    }
+                    onSelectDate={(date) =>
+                      handleChange("fimFerias", date ?? null)
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className={styles.fieldRow}></div>
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Situação:</Label>
+                  <Select
+                    className={styles.input}
+                    value={String(form.situacao)}
+                    onChange={(_, data) =>
+                      handleChange("situacao", Number(data.value))
+                    }
+                  >
+                    <option value="1">Programada</option>
+                    <option value="2">Homologada</option>
+                    <option value="3">Cancelada</option>
+                  </Select>
+                </div>
+
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Salário R$:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.salario ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("salario", Number(value));
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.fieldRow}>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Adicional férias:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.adicionalFerias ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("adicionalFerias", Number(value));
+                    }}
+                  />
+                </div>
+                <div className={styles.fieldGroup}>
+                  <Label className={styles.label}>Total férias:</Label>
+                  <SpinButton
+                    className={styles.input}
+                    value={form.totalPagamentoFerias ?? 0}
+                    onChange={(_, d) => {
+                      const value = d.displayValue ?? "0";
+                      handleChange("totalPagamentoFerias", Number(value));
+                    }}
+                  />
+                </div>
+              </div>
+
               <div className={styles.fieldRow}>
                 <Label className={styles.label}>Observação:</Label>
                 <Textarea
                   className={styles.input}
-                  value={form.observacao}
-                  onChange={(_, d) =>
-                    handleChange("observacao", d.value ?? "")
-                  }
+                  value={form.observacao ?? ""}
+                  onChange={(_, d) => handleChange("observacao", d.value ?? "")}
                   resize="vertical"
                   rows={4}
                 />

@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { createBaseState } from "./createBaseState";
 import type { RootStore } from "./RootStore";
 import api from "../services/api";
+import type { ComboboxDto } from "../services/ComboboxDto";
 
 export type SituacaoTurno = "" | "Ativa" | "Inativa";
 
@@ -14,7 +15,7 @@ export interface TurnoTrabalhoDto {
   entrada2: string;
   saida2: string;
   inicioVigencia: string;
-  situacao: "Ativa" | "Inativa";
+  situacao: number;
 }
 
 export interface TurnoTrabalhoForCreateDto {
@@ -45,6 +46,7 @@ export class TurnoTrabalhoStore {
   base = createBaseState();
   turnos: TurnoTrabalhoDto[] = [];
   turnoForUpdate: TurnoTrabalhoForUpdateDto | null = null;
+  combobox: ComboboxDto[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -55,6 +57,15 @@ export class TurnoTrabalhoStore {
       const { data } = await api.get("/turnoTrabalho");
       runInAction(() => {
         this.turnos = data;
+      });
+    });
+  }
+
+  async getCombobox() {
+    await this.base.execute(async () => {
+      const { data } = await api.get<ComboboxDto[]>("/turnoTrabalho/combobox");
+      runInAction(() => {
+        this.combobox = data;
       });
     });
   }

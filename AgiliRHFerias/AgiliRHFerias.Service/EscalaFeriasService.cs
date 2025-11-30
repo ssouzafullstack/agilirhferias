@@ -4,6 +4,8 @@ using AgiliRHFerias.Entities.Models;
 using AgiliRHFerias.Service.Contracts;
 using AgiliRHFerias.Shared.DataTransferObjects.EscalasFerias;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,15 +28,19 @@ namespace AgiliRHFerias.Service
         }
         public async Task<IEnumerable<EscalaFeriasDto>> GetAllAsync(bool trackChanges)
         {
-            var entities = await _repository.EscalaFerias.GetAllAsync(trackChanges);
-            var dtos = _mapper.Map<IEnumerable<EscalaFeriasDto>>(entities);
+            var dtos = await _repository.EscalaFerias
+                                        .FindAll(trackChanges)
+                                        .ProjectTo<EscalaFeriasDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
             return dtos;
         }
 
         public async Task<EscalaFeriasForUpdateDto> GetAsync(Guid id, bool trackChanges)
         {
-            EscalaFerias entity = await _repository.EscalaFerias.GetAsync(id, trackChanges);
-            var dto = _mapper.Map<EscalaFeriasForUpdateDto>(entity);
+            EscalaFeriasForUpdateDto dto = await _repository.EscalaFerias
+                                                  .FindByCondition(e => e.Id.Equals(id), trackChanges)
+                                                  .ProjectTo<EscalaFeriasForUpdateDto>(_mapper.ConfigurationProvider)
+                                                  .SingleOrDefaultAsync();
             return dto;
         }
 

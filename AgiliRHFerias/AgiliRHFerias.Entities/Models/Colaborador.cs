@@ -9,6 +9,11 @@ namespace AgiliRHFerias.Entities.Models
 {
     public class Colaborador : EntityConfiguration
     {
+        public Colaborador()
+        {
+            PeriodosAquisitivos = new List<PeriodoAquisitivo>();
+        }
+
         [MaxLength(300)]
         public string Nome { get; set; } = string.Empty;
 

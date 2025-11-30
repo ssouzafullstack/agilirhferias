@@ -2,36 +2,39 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { createBaseState } from "./createBaseState";
 import api from "../services/api";
 import type { RootStore } from "./RootStore";
-
-export type SituacaoColaborador = "" | "Ativo" | "Inativo";
+import type { ComboboxDto } from "../services/ComboboxDto";
 
 export interface ColaboradorDto {
   id: string;
-  matricula: string;
   nome: string;
-  dataAdmissao: string;
-  dataDesligamento: string | null;
-  inicioPeriodoAquisitivo: string;
-  fimPeriodoAquisitivo: string;
-  situacao: "Ativo" | "Inativo";
+  salario: number | undefined;
+  dataAdmissao: Date | string | undefined;
+  dataDesligamento: Date | string | undefined;
+  inicioPeriodoAquisitivo: Date | string | undefined;
+  fimPeriodoAquisitivo: Date | string | undefined;
+  situacao: number;
 }
 
 export interface ColaboradorForCreateDto {
   matricula: string;
   nome: string;
   email: string;
+  idEmpresa: string;
+  empresaDesc: string;
   dataAdmissao: Date | string | null;
   dataDesligamento: Date | string | null;
-  salario: number | null;
-  cargo: string;
+  salario: number | undefined;
+  cargoDesc: string;
   turno: string;
-  configPeriodoAquisitivo: string;
+  configPeriodoAquisitivoDesc: string;
   faltas: number | null;
   inicioPeriodoAquisitivo: Date | string | null;
   fimPeriodoAquisitivo: Date | string | null;
   exerceLideranca: boolean;
-  lider: string;
-  situacao: SituacaoColaborador;
+  numeroDependentes: number;
+  situacao: number;
+  idCargo: string;
+  idConfigPeriodoAquisitivo: string;
 }
 
 export interface ColaboradorForUpdateDto extends ColaboradorForCreateDto {
@@ -44,6 +47,7 @@ export class ColaboradorStore {
   base = createBaseState();
   colaboradores: ColaboradorDto[] = [];
   colaboradorForUpdate: ColaboradorForUpdateDto | null = null;
+  combobox: ComboboxDto[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -54,6 +58,15 @@ export class ColaboradorStore {
       const { data } = await api.get("/colaborador");
       runInAction(() => {
         this.colaboradores = data;
+      });
+    });
+  }
+  
+  async getCombobox() {
+    await this.base.execute(async () => {
+      const { data } = await api.get<ComboboxDto[]>("/colaborador/combobox");
+      runInAction(() => {
+        this.combobox = data;
       });
     });
   }

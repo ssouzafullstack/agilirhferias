@@ -4,6 +4,8 @@ using AgiliRHFerias.Entities.Models;
 using AgiliRHFerias.Service.Contracts;
 using AgiliRHFerias.Shared.DataTransferObjects.AvisosFerias;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,15 +28,19 @@ namespace AgiliRHFerias.Service
         }
         public async Task<IEnumerable<AvisoFeriasDto>> GetAllAsync(bool trackChanges)
         {
-            var entities = await _repository.AvisoFerias.GetAllAsync(trackChanges);
-            var dtos = _mapper.Map<IEnumerable<AvisoFeriasDto>>(entities);
+            var dtos = await _repository.AvisoFerias
+                                        .FindAll(trackChanges)
+                                        .ProjectTo<AvisoFeriasDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
             return dtos;
         }
 
         public async Task<AvisoFeriasForUpdateDto> GetAsync(Guid id, bool trackChanges)
         {
-            AvisoFerias entity = await _repository.AvisoFerias.GetAsync(id, trackChanges);
-            var dto = _mapper.Map<AvisoFeriasForUpdateDto>(entity);
+            AvisoFeriasForUpdateDto dto = await _repository.AvisoFerias
+                                                           .FindByCondition(e => e.Id.Equals(id), trackChanges)
+                                                           .ProjectTo<AvisoFeriasForUpdateDto>(_mapper.ConfigurationProvider)
+                                                           .SingleOrDefaultAsync();
             return dto;
         }
 

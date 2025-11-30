@@ -11,6 +11,11 @@ import { useEffect, useState } from "react";
 import { AddAvisoFeriasDialog } from "../AvisoFerias/AddAvisoFeriasDialog";
 import EditAvisoFeriasDialog from "../AvisoFerias/EditAvisoFeriasDialog";
 import { DeleteAvisoFeriasDialog } from "../AvisoFerias/DeleteAvisoFeriasDialog";
+import {
+  formatCurrency,
+  formatDateBR,
+  formatSituacaoFerias,
+} from "../utils/formatUtils";
 
 const AvisoFerias = observer(() => {
   const { avisoFeriasStore } = useStore();
@@ -56,20 +61,49 @@ const AvisoFerias = observer(() => {
         actions
         data={avisoFeriasStore.avisos}
         columns={[
-          { key: "colaborador", label: "Colaborador", width: "22%" },
-          { key: "dataAdmissao", label: "Admissão", width: "10%" },
+          { key: "nomeColaborador", label: "Colaborador", width: "20%" },
           {
-            key: "periodoAquisitivo",
-            label: "Período Aquisitivo",
-            width: "13%",
+            key: "dataAdmissao",
+            label: "Admissão",
+            width: "10%",
+            render: (item) => formatDateBR(item.dataAdmissao),
           },
-          { key: "diasGozo", label: "Dias Gozo", width: "8%" },
-          { key: "diasAbono", label: "Dias Abono", width: "8%" },
-          { key: "dataInicio", label: "Início", width: "10%" },
-          { key: "dataFim", label: "Fim", width: "10%" },
+          {
+            key: "inicioPeriodoAquisitivo",
+            label: "Período Aquisitivo",
+            width: "20%",
+            render: (item) =>
+              `${formatDateBR(item.inicioPeriodoAquisitivo)} - ${formatDateBR(
+                item.fimPeriodoAquisitivo
+              )}`,
+          },
+          { key: "numeroDiasGozo", label: "Dias Gozo", width: "8%" },
+          { key: "numeroDiasAbono", label: "Dias Abono", width: "8%" },
+          {
+            key: "inicioFerias",
+            label: "Início",
+            width: "10%",
+            render: (item) => formatDateBR(item.inicioFerias),
+          },
+          {
+            key: "fimFerias",
+            label: "Fim",
+            width: "10%",
+            render: (item) => formatDateBR(item.fimFerias),
+          },
           { key: "adicionalFerias", label: "Adic. Férias", width: "9%" },
-          { key: "totalPagamentoFerias", label: "Total Férias", width: "10%" },
-          { key: "situacao", label: "Situação", width: "10%" },
+          {
+            key: "totalPagamentoFerias",
+            label: "Total Férias",
+            width: "10%",
+            render: (item) => formatCurrency(item.totalPagamentoFerias),
+          },
+          {
+            key: "situacao",
+            label: "Situação",
+            width: "10%",
+            render: (item) => formatSituacaoFerias(item.situacao),
+          },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}
         onAdd={() => setAddDialogOpen(true)}
@@ -101,7 +135,7 @@ const AvisoFerias = observer(() => {
       <DeleteAvisoFeriasDialog
         open={isDeleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
-        item={selectedItem?.colaborador}
+        item={selectedItem?.nomeColaborador}
         onConfirm={handleDelete}
       />
     </div>

@@ -2,30 +2,28 @@ import { makeAutoObservable, runInAction } from "mobx";
 import type { RootStore } from "./RootStore";
 import { createBaseState } from "./createBaseState";
 import api from "../services/api";
+import { formatBoolean, formatSituacao } from "../utils/formatUtils";
+import type { ComboboxDto } from "../services/ComboboxDto";
 
 export interface EmpresaDto {
   id: string;
-  codigo: string;
   nomeFantasia: string;
-  tipo: string;
+  filial: boolean;
+  filialDesc: "SIM" | "NÃO";
   cnpj: string;
   cep: string;
-  cidade: string;
-  estado: string;
-  situacao: string;
+  situacao: number;
+  situacaoDesc: "" | "Ativa" | "Baixada";
 }
 
 export interface EmpresaForUpsertDto {
   id?: string;
-  codigo: string;
   razaoSocial: string;
   nomeFantasia: string;
-  tipo: "" | "Matriz" | "Filial";
+  filial: boolean;
   cnpj: string;
   cep: string;
-  cidade: string;
-  estado: string;
-  situacao: "" | "Ativa" | "Baixada";
+  situacao: number;
 }
 
 export class EmpresaStore {
@@ -33,6 +31,7 @@ export class EmpresaStore {
   base = createBaseState();
   empresaForUpsert: EmpresaForUpsertDto | null = null;
   empresas: EmpresaDto[] = [];
+  combobox: ComboboxDto[] = [];
   loading = false;
   error: string | null = null;
 
@@ -43,8 +42,24 @@ export class EmpresaStore {
   async getAll() {
     await this.base.execute(async () => {
       const { data } = await api.get<EmpresaDto[]>("/empresa");
+      const formatted = data.map((item: EmpresaDto) => ({
+        ...item,
+        filialDesc: formatBoolean(item.filial) as "SIM" | "NÃO",
+        situacaoDesc: formatSituacao(item.situacao) as "" | "Ativa" | "Baixada",
+      }));
       runInAction(() => {
-        this.empresas = data;
+        this.empresas = formatted;
+      });
+    });
+  }
+
+  async getCombobox() {
+    await this.base.execute(async () => {
+      const { data } = await api.get<ComboboxDto[]>(
+        "/empresa/combobox"
+      );
+      runInAction(() => {
+        this.combobox = data;
       });
     });
   }

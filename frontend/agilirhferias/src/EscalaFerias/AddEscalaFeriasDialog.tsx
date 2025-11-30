@@ -55,12 +55,12 @@ const initialForm: EscalaFeriasForCreateDto = {
   colaborador: "",
   dataAdmissao: null,
   periodoAquisitivo: "",
-  diasGozo: null,
-  diasAbono: null,
+  numeroDiasGozo: null,
+  numeroDiasAbono: null,
   faltas: null,
   diasDisponiveis: null,
-  dataInicio: null,
-  dataFim: null,
+  inicioFerias: null,
+  fimFerias: null,
   situacao: "",
   observacao: "",
 };
@@ -71,8 +71,7 @@ export function AddEscalaFeriasDialog({
   onSave,
 }: AddEscalaFeriasDialogProps) {
   const styles = useStyles();
-  const [form, setForm] =
-    React.useState<EscalaFeriasForCreateDto>(initialForm);
+  const [form, setForm] = React.useState<EscalaFeriasForCreateDto>(initialForm);
 
   const handleChange = <K extends keyof EscalaFeriasForCreateDto>(
     key: K,
@@ -150,10 +149,10 @@ export function AddEscalaFeriasDialog({
                 <Label className={styles.label}>Dias de gozo:</Label>
                 <SpinButton
                   className={styles.input}
-                  value={form.diasGozo ?? 0}
+                  value={form.numeroDiasGozo ?? 0}
                   onChange={(_, d) =>
                     handleChange(
-                      "diasGozo",
+                      "numeroDiasGozo",
                       d.value ? Number(d.value) || null : null
                     )
                   }
@@ -162,10 +161,10 @@ export function AddEscalaFeriasDialog({
                 <Label className={styles.label}>Dias de abono:</Label>
                 <SpinButton
                   className={styles.input}
-                  value={form.diasAbono ?? 0}
+                  value={form.numeroDiasAbono ?? 0}
                   onChange={(_, d) =>
                     handleChange(
-                      "diasAbono",
+                      "numeroDiasAbono",
                       d.value ? Number(d.value) || null : null
                     )
                   }
@@ -204,12 +203,12 @@ export function AddEscalaFeriasDialog({
                 <DatePicker
                   formatDate={formatDateBR}
                   value={
-                    form.dataInicio
-                      ? new Date(form.dataInicio as any)
+                    form.inicioFerias
+                      ? new Date(form.inicioFerias as any)
                       : undefined
                   }
                   onSelectDate={(date) =>
-                    handleChange("dataInicio", date ?? null)
+                    handleChange("inicioFerias", date ?? null)
                   }
                   placeholder="Selecione a data"
                 />
@@ -218,12 +217,10 @@ export function AddEscalaFeriasDialog({
                 <DatePicker
                   formatDate={formatDateBR}
                   value={
-                    form.dataFim
-                      ? new Date(form.dataFim as any)
-                      : undefined
+                    form.fimFerias ? new Date(form.fimFerias as any) : undefined
                   }
                   onSelectDate={(date) =>
-                    handleChange("dataFim", date ?? null)
+                    handleChange("fimFerias", date ?? null)
                   }
                   placeholder="Selecione a data"
                 />
@@ -236,10 +233,7 @@ export function AddEscalaFeriasDialog({
                   className={styles.input}
                   value={form.situacao}
                   onChange={(_, data) =>
-                    handleChange(
-                      "situacao",
-                      data.value as SituacaoEscalaFerias
-                    )
+                    handleChange("situacao", data.value as SituacaoEscalaFerias)
                   }
                 >
                   <Option value="">Selecione</Option>
@@ -255,9 +249,7 @@ export function AddEscalaFeriasDialog({
                 <Textarea
                   className={styles.input}
                   value={form.observacao}
-                  onChange={(_, d) =>
-                    handleChange("observacao", d.value ?? "")
-                  }
+                  onChange={(_, d) => handleChange("observacao", d.value ?? "")}
                   resize="vertical"
                   rows={4}
                 />

@@ -113,11 +113,11 @@ const EditCargoDialog = observer(
                   </div>
 
                   <div className={styles.fieldRow}>
-                    <Label className={styles.label}>Nome:</Label>
+                    <Label className={styles.label}>Descrição:</Label>
                     <Input
                       className={styles.input}
-                      value={dto.nome ?? ""}
-                      onChange={(_, d) => handleChange("nome", d.value ?? "")}
+                      value={dto.descricao ?? ""}
+                      onChange={(_, d) => handleChange("descricao", d.value ?? "")}
                       placeholder="Ex: Analista de RH"
                     />
                   </div>
@@ -126,8 +126,8 @@ const EditCargoDialog = observer(
                     <Label className={styles.label}>Nível:</Label>
                     <Input
                       className={styles.input}
-                      value={dto.nivel ?? ""}
-                      onChange={(_, d) => handleChange("nivel", d.value ?? "")}
+                      value={dto.nivelCargo ?? ""}
+                      onChange={(_, d) => handleChange("nivelCargo", d.value ?? "")}
                       placeholder="Ex: Júnior / Pleno / Sênior"
                     />
                   </div>

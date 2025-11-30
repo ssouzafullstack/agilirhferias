@@ -50,8 +50,8 @@ interface AddCargoDialogProps {
 
 const initialFormData: CargoForCreateDto = {
   codigo: null,
-  nome: "",
-  nivel: "",
+  descricao: "",
+  nivelCargo: "",
   cbo: "",
   gerenciaSupervisao: false,
   inicioVigencia: undefined,
@@ -113,8 +113,8 @@ export function AddCargoDialog({
                 <Label className={styles.label}>Nome:</Label>
                 <Input
                   className={styles.input}
-                  value={formData.nome}
-                  onChange={(_, d) => handleChange("nome", d.value ?? "")}
+                  value={formData.descricao}
+                  onChange={(_, d) => handleChange("descricao", d.value ?? "")}
                   placeholder="Ex: Analista de RH"
                 />
               </div>
@@ -123,8 +123,8 @@ export function AddCargoDialog({
                 <Label className={styles.label}>Nível:</Label>
                 <Input
                   className={styles.input}
-                  value={formData.nivel}
-                  onChange={(_, d) => handleChange("nivel", d.value ?? "")}
+                  value={formData.nivelCargo}
+                  onChange={(_, d) => handleChange("nivelCargo", d.value ?? "")}
                   placeholder="Ex: Júnior / Pleno / Sênior"
                 />
               </div>

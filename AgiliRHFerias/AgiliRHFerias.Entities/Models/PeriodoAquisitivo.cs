@@ -14,9 +14,6 @@ namespace AgiliRHFerias.Entities.Models
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
         public SituacaoPeriodoAquisitivo Situacao { get; set; }
-        public Guid IdPeriodoConcessivo { get; set; }
-        [ForeignKey(nameof(IdPeriodoConcessivo))]
-        public PeriodoConcessivo PeriodoConcessivo { get; set; }
         public ICollection<EscalaFerias> EscalasFerias { get; set; }
     }
 }

@@ -10,10 +10,10 @@ export interface EscalaFeriasDto {
   colaborador: string;
   dataAdmissao: string;
   periodoAquisitivo: string;
-  diasGozo: number;
-  diasAbono: number;
-  dataInicio: string;
-  dataFim: string;
+  numeroDiasGozo: number;
+  numeroDiasAbono: number;
+  inicioFerias: string;
+  fimFerias: string;
   situacao: "Programada" | "Homologada" | "Cancelada";
 }
 
@@ -21,12 +21,12 @@ export interface EscalaFeriasForCreateDto {
   colaborador: string;
   dataAdmissao: Date | string | null;
   periodoAquisitivo: string;
-  diasGozo: number | null;
-  diasAbono: number | null;
+  numeroDiasGozo: number | null;
+  numeroDiasAbono: number | null;
   faltas: number | null;
   diasDisponiveis: number | null;
-  dataInicio: Date | string | null;
-  dataFim: Date | string | null;
+  inicioFerias: Date | string | null;
+  fimFerias: Date | string | null;
   situacao: SituacaoEscalaFerias;
   observacao: string;
 }

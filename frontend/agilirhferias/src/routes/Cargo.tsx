@@ -63,8 +63,8 @@ const Cargo = observer(() => {
         data={cargoStore.cargos}
         columns={[
           { key: "codigo", label: "Código", width: "10%" },
-          { key: "nome", label: "Nome", width: "25%" },
-          { key: "nivel", label: "Nível", width: "15%" },
+          { key: "descricao", label: "Nome", width: "25%" },
+          { key: "nivelCargo", label: "Nível", width: "15%" },
           { key: "cbo", label: "CBO", width: "10%" },
           {
             key: "gerenciaSupervisao",
@@ -114,7 +114,7 @@ const Cargo = observer(() => {
       <DeleteCargoDialog
         open={isDeleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
-        item={selectedItem?.nome}
+        item={selectedItem?.descricao}
         onConfirm={handleDelete}
       />
     </div>

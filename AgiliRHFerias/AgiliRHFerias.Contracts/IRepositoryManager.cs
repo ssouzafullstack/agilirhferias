@@ -13,6 +13,11 @@ namespace AgiliRHFerias.Contracts
         IConfigOrcamentoFeriasRepository ConfigOrcamentoFerias { get; }
         IFaixaOrcamentoFeriasRepository FaixaOrcamentoFerias { get; }
         IEmpresaRepository Empresa { get; }
+        ICargoRepository Cargo { get; }
+        ITurnoRepository Turno { get; }
+        IColaboradorRepository Colaborador { get; }
+        IEscalaFeriasRepository EscalaFerias { get; }
+        IAvisoFeriasRepository AvisoFerias { get; }
         Task SaveAsync();
     }
 }

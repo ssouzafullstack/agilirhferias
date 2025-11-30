@@ -64,7 +64,7 @@ const initialForm: AvisoFeriasForCreateDto = {
   situacao: "",
   salario: null,
   adicionalFerias: null,
-  totalFerias: null,
+  totalPagamentoFerias: null,
   observacao: "",
 };
 
@@ -284,10 +284,10 @@ export function AddAvisoFeriasDialog({
                 <Label className={styles.label}>Total férias:</Label>
                 <SpinButton
                   className={styles.input}
-                  value={form.totalFerias ?? 0}
+                  value={form.totalPagamentoFerias ?? 0}
                   onChange={(_, d) =>
                     handleChange(
-                      "totalFerias",
+                      "totalPagamentoFerias",
                       d.value ? Number(d.value) || null : null
                     )
                   }

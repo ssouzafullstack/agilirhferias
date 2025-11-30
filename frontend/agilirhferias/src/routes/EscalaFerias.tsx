@@ -63,10 +63,10 @@ const EscalaFerias = observer(() => {
             label: "Período Aquisitivo",
             width: "15%",
           },
-          { key: "diasGozo", label: "Dias Gozo", width: "10%" },
-          { key: "diasAbono", label: "Dias Abono", width: "10%" },
-          { key: "dataInicio", label: "Início", width: "10%" },
-          { key: "dataFim", label: "Fim", width: "10%" },
+          { key: "numeroDiasGozo", label: "Dias Gozo", width: "10%" },
+          { key: "numeroDiasAbono", label: "Dias Abono", width: "10%" },
+          { key: "inicioFerias", label: "Início", width: "10%" },
+          { key: "fimFerias", label: "Fim", width: "10%" },
           { key: "situacao", label: "Situação", width: "10%" },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}

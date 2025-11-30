@@ -149,10 +149,10 @@ const EditEscalaFeriasDialog = observer(
                     <Label className={styles.label}>Dias de gozo:</Label>
                     <SpinButton
                       className={styles.input}
-                      value={dto.diasGozo ?? 0}
+                      value={dto.numeroDiasGozo ?? 0}
                       onChange={(_, d) =>
                         handleChange(
-                          "diasGozo",
+                          "numeroDiasGozo",
                           d.value ? Number(d.value) || null : null
                         )
                       }
@@ -161,10 +161,10 @@ const EditEscalaFeriasDialog = observer(
                     <Label className={styles.label}>Dias de abono:</Label>
                     <SpinButton
                       className={styles.input}
-                      value={dto.diasAbono ?? 0}
+                      value={dto.numeroDiasAbono ?? 0}
                       onChange={(_, d) =>
                         handleChange(
-                          "diasAbono",
+                          "numeroDiasAbono",
                           d.value ? Number(d.value) || null : null
                         )
                       }
@@ -203,12 +203,12 @@ const EditEscalaFeriasDialog = observer(
                     <DatePicker
                       formatDate={formatDateBR}
                       value={
-                        dto.dataInicio
-                          ? new Date(dto.dataInicio as any)
+                        dto.inicioFerias
+                          ? new Date(dto.inicioFerias as any)
                           : undefined
                       }
                       onSelectDate={(date) =>
-                        handleChange("dataInicio", date ?? null)
+                        handleChange("inicioFerias", date ?? null)
                       }
                     />
 
@@ -216,12 +216,12 @@ const EditEscalaFeriasDialog = observer(
                     <DatePicker
                       formatDate={formatDateBR}
                       value={
-                        dto.dataFim
-                          ? new Date(dto.dataFim as any)
+                        dto.fimFerias
+                          ? new Date(dto.fimFerias as any)
                           : undefined
                       }
                       onSelectDate={(date) =>
-                        handleChange("dataFim", date ?? null)
+                        handleChange("fimFerias", date ?? null)
                       }
                     />
                   </div>

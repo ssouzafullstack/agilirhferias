@@ -16,6 +16,11 @@ namespace AgiliRHFerias.Repository
         private readonly Lazy<IConfigOrcamentoFeriasRepository> _configOrcamentoFeriasRepository;
         private readonly Lazy<IFaixaOrcamentoFeriasRepository> _faixaOrcamentoFeriasRepository;
         private readonly Lazy<IEmpresaRepository> _empresaRepository;
+        private readonly Lazy<ICargoRepository> _cargoRepository;
+        private readonly Lazy<ITurnoRepository> _turnoRepository;
+        private readonly Lazy<IColaboradorRepository> _colaboadorRepository;
+        private readonly Lazy<IEscalaFeriasRepository> _escalaFeriasRepository;
+        private readonly Lazy<IAvisoFeriasRepository> _avisoFeriasRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -29,6 +34,12 @@ namespace AgiliRHFerias.Repository
             _configOrcamentoFeriasRepository = new Lazy<IConfigOrcamentoFeriasRepository>(() => new ConfigOrcamentoFeriasRepository(repositoryContext));
             _faixaOrcamentoFeriasRepository = new Lazy<IFaixaOrcamentoFeriasRepository>(() => new FaixaOrcamentoFeriasRepository(repositoryContext));
             _empresaRepository = new Lazy<IEmpresaRepository>(() => new EmpresaRepository(repositoryContext));
+            _cargoRepository = new Lazy<ICargoRepository>(() => new CargoRepository(repositoryContext));
+            _cargoRepository = new Lazy<ICargoRepository>(() => new CargoRepository(repositoryContext));
+            _turnoRepository = new Lazy<ITurnoRepository>(() => new TurnoRepository(repositoryContext));
+            _colaboadorRepository = new Lazy<IColaboradorRepository>(() => new ColaboradorRepository(repositoryContext));
+            _escalaFeriasRepository = new Lazy<IEscalaFeriasRepository>(() => new EscalaFeriasRepository(repositoryContext));
+            _avisoFeriasRepository = new Lazy<IAvisoFeriasRepository>(() => new AvisoFeriasRepository(repositoryContext));
         }
 
         public ICompanyRepository Company => _companyRepository.Value;
@@ -40,6 +51,11 @@ namespace AgiliRHFerias.Repository
         public IConfigOrcamentoFeriasRepository ConfigOrcamentoFerias => _configOrcamentoFeriasRepository.Value;
         public IFaixaOrcamentoFeriasRepository FaixaOrcamentoFerias => _faixaOrcamentoFeriasRepository.Value;
         public IEmpresaRepository Empresa => _empresaRepository.Value;
+        public ICargoRepository Cargo => _cargoRepository.Value;
+        public ITurnoRepository Turno => _turnoRepository.Value;
+        public IColaboradorRepository Colaborador => _colaboadorRepository.Value;
+        public IEscalaFeriasRepository EscalaFerias => _escalaFeriasRepository.Value;
+        public IAvisoFeriasRepository AvisoFerias => _avisoFeriasRepository.Value;
 
         public async Task SaveAsync()
         {

@@ -278,10 +278,10 @@ const EditAvisoFeriasDialog = observer(
                     <Label className={styles.label}>Total férias:</Label>
                     <SpinButton
                       className={styles.input}
-                      value={dto.totalFerias ?? 0}
+                      value={dto.totalPagamentoFerias ?? 0}
                       onChange={(_, d) =>
                         handleChange(
-                          "totalFerias",
+                          "totalPagamentoFerias",
                           d.value ? Number(d.value) || null : null
                         )
                       }

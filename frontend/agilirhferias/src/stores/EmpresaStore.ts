@@ -51,7 +51,7 @@ export class EmpresaStore {
 
   async get(id: string) {
     await this.base.execute(async () => {
-      const { data } = await api.get<EmpresaForUpsertDto>(`/empresas/${id}`);
+      const { data } = await api.get<EmpresaForUpsertDto>(`/empresa/${id}`);
       runInAction(() => {
         this.empresaForUpsert = data;
       });

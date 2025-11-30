@@ -68,7 +68,7 @@ const AvisoFerias = observer(() => {
           { key: "dataInicio", label: "Início", width: "10%" },
           { key: "dataFim", label: "Fim", width: "10%" },
           { key: "adicionalFerias", label: "Adic. Férias", width: "9%" },
-          { key: "totalFerias", label: "Total Férias", width: "10%" },
+          { key: "totalPagamentoFerias", label: "Total Férias", width: "10%" },
           { key: "situacao", label: "Situação", width: "10%" },
         ]}
         onSelect={(item) => item && setSelectedItem(item)}

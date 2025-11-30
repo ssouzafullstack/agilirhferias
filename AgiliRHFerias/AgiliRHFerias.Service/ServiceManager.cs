@@ -18,6 +18,11 @@ namespace AgiliRHFerias.Service
         private readonly Lazy<IConfigReducaoDiasFeriasService> _configReducaoDiasFeriasService;
         private readonly Lazy<IConfigOrcamentoFeriasService> _configOrcamentoFeriasService;
         private readonly Lazy<IEmpresaService> _empresaService;
+        private readonly Lazy<ICargoService> _cargoService;
+        private readonly Lazy<ITurnoService> _turnoService;
+        private readonly Lazy<IColaboradorService> _colaboradorService;
+        private readonly Lazy<IEscalaFeriasService> _escalaFeriasService;
+        private readonly Lazy<IAvisoFeriasService> _avisoFeriasService;
 
         public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration, IUserContextService userContextService)
         {
@@ -29,6 +34,11 @@ namespace AgiliRHFerias.Service
             _configReducaoDiasFeriasService = new Lazy<IConfigReducaoDiasFeriasService>(() => new ConfigReducaoDiasFeriasService(repositoryManager, logger, mapper, userContextService));
             _configOrcamentoFeriasService = new Lazy<IConfigOrcamentoFeriasService>(() => new ConfigOrcamentoFeriasService(repositoryManager, logger, mapper, userContextService));
             _empresaService = new Lazy<IEmpresaService>(() => new EmpresaService(repositoryManager, logger, mapper, userContextService));
+            _cargoService = new Lazy<ICargoService>(() => new CargoService(repositoryManager, logger, mapper, userContextService));
+            _turnoService = new Lazy<ITurnoService>(() => new TurnoService(repositoryManager, logger, mapper, userContextService));
+            _colaboradorService = new Lazy<IColaboradorService>(() => new ColaboradorService(repositoryManager, logger, mapper, userContextService));
+            _escalaFeriasService = new Lazy<IEscalaFeriasService>(() => new EscalaFeriasService(repositoryManager, logger, mapper, userContextService));
+            _avisoFeriasService = new Lazy<IAvisoFeriasService>(() => new AvisoFeriasService(repositoryManager, logger, mapper, userContextService));
         }
 
         public ICompanyService CompanyService => _companyService.Value;
@@ -39,5 +49,10 @@ namespace AgiliRHFerias.Service
         public IConfigReducaoDiasFeriasService ConfigReducaoDiasFeriasService => _configReducaoDiasFeriasService.Value;
         public IConfigOrcamentoFeriasService ConfigOrcamentoFeriasService => _configOrcamentoFeriasService.Value;
         public IEmpresaService EmpresaService => _empresaService.Value;
+        public ICargoService CargoService => _cargoService.Value;
+        public ITurnoService TurnoService => _turnoService.Value;
+        public IColaboradorService ColaboradorService => _colaboradorService.Value;
+        public IEscalaFeriasService EscalaFeriasService => _escalaFeriasService.Value;
+        public IAvisoFeriasService AvisoFeriasService => _avisoFeriasService.Value;
     }
 }

@@ -33,7 +33,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Observacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<int>("Situacao")
                         .HasColumnType("int");
@@ -46,7 +47,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -65,11 +67,13 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("CBO")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("InicioVigencia")
                         .HasColumnType("datetime2");
@@ -85,7 +89,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -109,7 +114,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(300)");
 
                     b.Property<bool>("ExerceLideranca")
                         .HasColumnType("bit");
@@ -129,7 +135,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(300)");
 
                     b.Property<int>("NumeroDependentes")
                         .HasColumnType("int");
@@ -145,7 +152,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -172,15 +180,18 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(60)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(60)");
 
                     b.HasKey("Id");
 
@@ -229,7 +240,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -246,14 +258,16 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("UltimaAlteracao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -270,14 +284,16 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("UltimaAlteracao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<decimal>("ValorDependentes")
                         .HasColumnType("decimal(18,2)");
@@ -300,7 +316,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -317,7 +334,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("InicioVigencia")
                         .HasColumnType("datetime2");
@@ -336,7 +354,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -353,14 +372,16 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("UltimaAlteracao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -385,12 +406,14 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("Position")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
@@ -433,22 +456,26 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("CEP")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("CNPJ")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("Filial")
                         .HasColumnType("bit");
 
                     b.Property<string>("NomeFantasia")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("RazaoSocial")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<int>("Situacao")
                         .HasColumnType("int");
@@ -458,7 +485,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -493,7 +521,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Observacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<int>("Situacao")
                         .HasColumnType("int");
@@ -503,7 +532,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -587,7 +617,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<Guid?>("IdConfigOrcamentoFerias")
                         .HasColumnType("uniqueidentifier");
@@ -650,7 +681,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<TimeSpan>("Entrada1")
                         .HasColumnType("time");
@@ -703,7 +735,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("Observacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("Id");
 
@@ -727,17 +760,12 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.Property<Guid>("IdColaborador")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdPeriodoConcessivo")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Situacao")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdColaborador");
-
-                    b.HasIndex("IdPeriodoConcessivo");
 
                     b.ToTable("PeriodosAquisitivos");
                 });
@@ -778,7 +806,8 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -790,29 +819,34 @@ namespace AgiliRHFerias.WebAPI.Migrations
             modelBuilder.Entity("AgiliRHFerias.Entities.Models.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -822,36 +856,43 @@ namespace AgiliRHFerias.WebAPI.Migrations
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("RefreshToken")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -869,19 +910,23 @@ namespace AgiliRHFerias.WebAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -895,25 +940,25 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93a81e96-0200-4766-9dae-88fc5b12aa8b",
+                            Id = "5d3ed02d-e9fc-4f02-8c57-b2a631269100",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "df6dd99a-e78e-45c7-a1db-2c88e2437cda",
+                            Id = "606347e4-b383-408d-9744-ed8ae92d9724",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "abfbf0f5-0562-45cb-a01a-c218037738c4",
+                            Id = "663e3ee3-d5fc-4475-9c80-c28d9ffd8d07",
                             Name = "Supervisor",
                             NormalizedName = "SUPERVISOR"
                         },
                         new
                         {
-                            Id = "784bc4d8-c653-43bd-aab2-61f412747d2f",
+                            Id = "8a8948de-b5f6-4caa-bf15-4b61ec837884",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -928,14 +973,17 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -953,14 +1001,17 @@ namespace AgiliRHFerias.WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("Id");
 
@@ -972,17 +1023,21 @@ namespace AgiliRHFerias.WebAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -994,10 +1049,12 @@ namespace AgiliRHFerias.WebAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -1009,16 +1066,20 @@ namespace AgiliRHFerias.WebAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(900)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -1269,15 +1330,7 @@ namespace AgiliRHFerias.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AgiliRHFerias.Entities.Models.PeriodoConcessivo", "PeriodoConcessivo")
-                        .WithMany()
-                        .HasForeignKey("IdPeriodoConcessivo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Colaborador");
-
-                    b.Navigation("PeriodoConcessivo");
                 });
 
             modelBuilder.Entity("AgiliRHFerias.Entities.Models.PeriodoConcessivo", b =>

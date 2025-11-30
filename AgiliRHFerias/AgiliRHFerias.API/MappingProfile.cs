@@ -1,11 +1,16 @@
 ﻿using AgiliRHFerias.Entities.Models;
 using AgiliRHFerias.Shared.DataTransferObjects;
 using AgiliRHFerias.Shared.DataTransferObjects.Authentication;
+using AgiliRHFerias.Shared.DataTransferObjects.AvisosFerias;
+using AgiliRHFerias.Shared.DataTransferObjects.Cargos;
+using AgiliRHFerias.Shared.DataTransferObjects.Colaboradores;
 using AgiliRHFerias.Shared.DataTransferObjects.ConfigsCalculoFerias;
 using AgiliRHFerias.Shared.DataTransferObjects.ConfigsOrcamentoFerias;
 using AgiliRHFerias.Shared.DataTransferObjects.ConfigsPeriodoAquisitivo;
 using AgiliRHFerias.Shared.DataTransferObjects.ConfigsReducaoDiasFerias;
 using AgiliRHFerias.Shared.DataTransferObjects.Empresas;
+using AgiliRHFerias.Shared.DataTransferObjects.EscalasFerias;
+using AgiliRHFerias.Shared.DataTransferObjects.Turnos;
 using AutoMapper;
 using System.Linq;
 
@@ -45,7 +50,37 @@ namespace AgiliRHFerias.WebAPI
             CreateMap<ConfigOrcamentoFeriasForUpdateDto, ConfigOrcamentoFerias>();
 
             CreateMap<Empresa, EmpresaDto>();
+            CreateMap<EmpresaForCreationDto, Empresa>();
+            CreateMap<EmpresaForUpdateDto, Empresa>().ReverseMap();
 
+            CreateMap<Cargo, CargoDto>();
+            CreateMap<CargoForCreationDto, Cargo>();
+            CreateMap<CargoForUpdateDto, Cargo>().ReverseMap();
+
+            CreateMap<FaixaTurnoTrabalho, TurnoDto>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.UltimaAlteracao,
+                           opt => opt.MapFrom(src => src.TurnoTrabalho.UltimaAlteracao));
+
+            CreateMap<TurnoDto, FaixaTurnoTrabalho>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.TurnoTrabalho, opt => opt.Ignore())
+                .ForMember(dest => dest.IdTurnoTrabalho, opt => opt.Ignore());
+            CreateMap<TurnoForCreationDto, FaixaTurnoTrabalho>();
+            CreateMap<TurnoForUpdateDto, FaixaTurnoTrabalho>().ReverseMap();
+
+
+            CreateMap<Colaborador, ColaboradorDto>();
+            CreateMap<ColaboradorForCreationDto, Colaborador>();
+            CreateMap<ColaboradorForUpdateDto, Colaborador>().ReverseMap();
+
+            CreateMap<EscalaFerias, EscalaFeriasDto>();
+            CreateMap<EscalaFeriasForCreationDto, EscalaFerias>();
+            CreateMap<EscalaFeriasForUpdateDto, EscalaFerias>().ReverseMap();
+
+            CreateMap<AvisoFerias, AvisoFeriasDto>();
+            CreateMap<AvisoFeriasForCreationDto, AvisoFerias>();
+            CreateMap<AvisoFeriasForUpdateDto, AvisoFerias>().ReverseMap();
         }
     }
 }

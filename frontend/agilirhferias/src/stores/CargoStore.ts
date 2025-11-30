@@ -8,8 +8,8 @@ export type SituacaoCargo = "" | "Ativo" | "Inativo";
 export interface CargoDto {
   id: string;
   codigo: number;
-  nome: string;
-  nivel: string;
+  descricao: string;
+  nivelCargo: string;
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: string;
@@ -18,8 +18,8 @@ export interface CargoDto {
 
 export interface CargoForCreateDto {
   codigo: number | null;
-  nome: string;
-  nivel: string;
+  descricao: string;
+  nivelCargo: string;
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: Date | null | undefined;
@@ -29,8 +29,8 @@ export interface CargoForCreateDto {
 export interface CargoForUpdateDto {
   id: string;
   codigo: number | null;
-  nome: string;
-  nivel: string;
+  descricao: string;
+  nivelCargo: string;
   cbo: string;
   gerenciaSupervisao: boolean;
   inicioVigencia: Date | null | undefined;

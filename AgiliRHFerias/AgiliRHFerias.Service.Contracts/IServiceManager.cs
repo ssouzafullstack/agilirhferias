@@ -10,5 +10,10 @@
         IConfigReducaoDiasFeriasService ConfigReducaoDiasFeriasService { get; }
         IConfigOrcamentoFeriasService ConfigOrcamentoFeriasService { get; }
         IEmpresaService EmpresaService { get; }
+        ICargoService CargoService { get; }
+        ITurnoService TurnoService { get; }
+        IColaboradorService ColaboradorService { get; }
+        IEscalaFeriasService EscalaFeriasService { get; }
+        IAvisoFeriasService AvisoFeriasService { get; }
     }
 }
